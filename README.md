@@ -102,3 +102,13 @@ Local cron instead of Actions, if you prefer:
 ## Tweaking
 
 Most knobs are in `config.py`: subreddit list, posts per sub, news query, arXiv query, model name. Defaults are fine if you just want to try it.
+
+## Contributing
+
+Open to contributions — PRs welcome.
+
+Ideas that would help: more / better sources, ranking tweaks, UI polish, tests, docs. Fork, branch off `main`, open a PR with a short note on what changed and how you checked it. If you’re unsure whether something fits, open an issue first and we can figure it out.
+
+## License
+
+[MIT](LICENSE) — use it, fork it, break it, improve it.
