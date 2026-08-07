@@ -245,6 +245,7 @@ def render(
 
     nav = date_nav_html(date_iso, dates, from_archive=from_archive)
     display = format_display_date(date_iso)
+    favicon_href = "../../favicon.svg" if from_archive else "favicon.svg"
 
     return f"""<!doctype html>
 <html lang="en">
@@ -252,6 +253,7 @@ def render(
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI — Trending This Week · {esc(display)}</title>
+<link rel="icon" href="{favicon_href}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

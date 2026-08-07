@@ -9,7 +9,8 @@ venv/
 
 # Generated artifacts (regenerated each run)
 raw_posts.json
-digest.json
+/digest.json
+# Per-day digests under archive/YYYY-MM-DD/ are kept so older pages can be re-rendered.
 
 # Keep index.html OUT of ignore if you deploy via GitHub Pages from the repo.
 # Uncomment the next line if you host it elsewhere and don't want it tracked.
