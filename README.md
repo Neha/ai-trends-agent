@@ -64,9 +64,40 @@ python analyze.py
 python render.py
 ```
 
-## Cost / hosting
+## Cost
 
-One Cursor agent call per run. That’s the only paid bit. The HTML is self-contained — open it locally, or wire up the GitHub Action in `.github/workflows/daily.yml` for daily Pages deploys (drop `CURSOR_API_KEY` in Actions secrets, turn on Pages → GitHub Actions).
+One Cursor agent call per run. That’s the only paid bit. Fetch + static hosting are free at this scale.
+
+## Deploy on GitHub Pages (daily)
+
+There’s already a workflow at `.github/workflows/daily.yml`. It runs every day at 08:00 UTC (and on manual trigger), builds the digest, commits that day’s page under `archive/YYYY-MM-DD/`, and deploys:
+
+- `index.html` — latest
+- `archive/…` — older days for the date nav
+- `favicon.svg`
+
+Setup:
+
+1. Push this repo to GitHub (if it isn’t already).
+2. Repo **Settings → Secrets and variables → Actions → New repository secret**
+   - Name: `CURSOR_API_KEY`
+   - Value: your key from https://cursor.com/dashboard/api
+3. Repo **Settings → Pages**
+   - **Source:** GitHub Actions  
+   (not “Deploy from a branch”)
+4. Kick it once: **Actions → Daily AI trends agent → Run workflow**
+
+When it finishes, the site should be here:
+
+**https://neha.github.io/ai-trends-agent/**
+
+(Also listed on the workflow run and under Settings → Pages.) Older days live under paths like `/archive/2026-08-07/`. After the first successful deploy it should refresh itself daily.
+
+Local cron instead of Actions, if you prefer:
+
+```bash
+0 8 * * * cd /path/to/ai-trends-agent && .venv/bin/python run.py
+```
 
 ## Tweaking
 
