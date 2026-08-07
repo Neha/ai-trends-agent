@@ -1,0 +1,64 @@
+name: Daily AI trends agent
+
+# Runs once a day and on manual trigger. Builds index.html, archives the day,
+# and publishes the site (including prior days) to GitHub Pages.
+# Set CURSOR_API_KEY in: repo Settings → Secrets and variables
+# → Actions → New repository secret.
+on:
+  schedule:
+    - cron: "0 8 * * *" # 08:00 UTC daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Build digest
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: python run.py
+
+      # Keep prior days in git so the next run can navigate back through them.
+      - name: Commit archive
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html archive/
+          if git diff --staged --quiet; then
+            echo "No archive changes to commit"
+          else
+            git commit -m "Archive AI digest for $(date -u +%F)"
+            git push
+          fi
+
+      # Publish latest page + full archive for date navigation.
+      - name: Prepare site
+        run: |
+          mkdir -p site
+          cp index.html site/index.html
+          cp -R archive site/archive
+
+      - name: Upload page
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,16 @@
+# Secrets — never commit
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated artifacts (regenerated each run)
+raw_posts.json
+digest.json
+
+# Keep index.html OUT of ignore if you deploy via GitHub Pages from the repo.
+# Uncomment the next line if you host it elsewhere and don't want it tracked.
+# index.html
