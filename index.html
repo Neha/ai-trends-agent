@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI — Trending This Week · August 07, 2026</title>
+<title>AI — Trending This Week · August 08, 2026</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,10 +40,108 @@
     min-height: 100vh;
   }
   .page {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 2rem 1rem 3rem;
   }
+  .page-header { margin-bottom: .25rem; }
+  .body-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main { min-width: 0; }
+  .timeline-rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    margin-top: 2.5rem; /* match first h2 so rail lines up with content body */
+  }
+  .timeline-card {
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--coral);
+    padding: .85rem .75rem 1rem;
+  }
+  .timeline-title {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .85rem;
+    text-align: center;
+    padding: .2rem .4rem;
+    background: var(--mango);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.85rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: .35rem;
+    bottom: .35rem;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-weight: 700;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item:hover { transform: none; box-shadow: none; }
+  .tl-dot {
+    position: absolute;
+    left: -0.72rem;
+    top: .45rem;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    z-index: 1;
+  }
+  .tl-item.current .tl-dot {
+    background: var(--coral);
+    box-shadow: 0 0 0 3px #ff5a5f44;
+  }
+  .tl-link {
+    display: flex;
+    flex-direction: column;
+    gap: .05rem;
+    padding: .35rem .5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  a.tl-link:hover {
+    background: var(--sky);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tl-item.current .tl-link {
+    background: var(--ink);
+    color: var(--mango);
+    border-color: var(--ink);
+  }
+  .tl-date { font-size: .88rem; }
+  .tl-year { font-size: .7rem; opacity: .75; font-weight: 600; }
+  .tl-item.current .tl-year { color: #ffe8a3; opacity: 1; }
   h1 {
     font-family: "Fredoka", "Nunito", sans-serif;
     font-weight: 700;
@@ -69,6 +167,7 @@
   }
   .section-pill:nth-child(2) { background: var(--mango); }
   .section-pill:nth-child(3) { background: var(--sky); }
+  .section-pill:nth-child(4) { background: var(--lime); }
   .section-pill:hover {
     transform: translate(-2px, -2px);
     box-shadow: 5px 5px 0 var(--ink);
@@ -77,6 +176,40 @@
   .section-pill .count {
     font-size: .72rem; font-weight: 800; padding: .1rem .4rem;
     border-radius: 8px; background: var(--ink); color: var(--mango);
+  }
+  .week-brief {
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.2rem 1.25rem;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--teal);
+  }
+  .week-brief h2 {
+    margin-top: 0;
+    background: var(--coral);
+    color: #fff;
+  }
+  .week-brief .overview {
+    margin: .85rem 0 .75rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .week-brief .vs-last {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem .55rem;
+    align-items: center;
+    font-size: .88rem;
+    font-weight: 700;
+  }
+  .week-brief .vs-last span {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: #fff;
   }
   .date-nav {
     margin-bottom: 1.25rem; padding: .4rem .7rem; border: 2.5px solid var(--ink);
@@ -101,14 +234,6 @@
   }
   .date-nav-row .nav-btn:last-child { text-align: right; }
   .nav-btn.disabled { color: #1a152366; pointer-events: none; }
-  .date-chips { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: flex-end; }
-  .date-chip {
-    font-size: .7rem; font-weight: 700; padding: .1rem .45rem; border-radius: 8px;
-    background: #fff; color: var(--ink); text-decoration: none;
-    border: 2px solid var(--ink); line-height: 1.2;
-  }
-  .date-chip:hover { background: var(--sky); }
-  .date-chip.current { background: var(--coral); color: #fff; }
   h2 {
     font-family: "Fredoka", "Nunito", sans-serif;
     font-weight: 700; font-size: 1.65rem; margin-top: 2.5rem;
@@ -121,8 +246,24 @@
   #notable-papers { background: var(--sky); }
   .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
                column-gap: .85rem; row-gap: 4rem; margin: .85rem 0 1.25rem; }
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .body-row { grid-template-columns: 1fr; }
+    .timeline-rail {
+      position: static;
+      order: -1;
+      margin-top: 0;
+      margin-bottom: .5rem;
+    }
+    .timeline {
+      display: flex; flex-wrap: wrap; gap: .5rem; padding: 0;
+    }
+    .timeline::before { display: none; }
+    .tl-item { margin: 0; }
+    .tl-dot { display: none; }
+    .tl-link { flex-direction: row; align-items: baseline; gap: .35rem; }
   }
   @media (max-width: 640px) {
     .card-grid { grid-template-columns: 1fr; }
@@ -167,13 +308,13 @@
   }
   .src:hover { background: var(--mango); color: var(--ink); }
   .src-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
-  ul { padding-left: 0; list-style: none; }
-  li {
+  .main > ul { padding-left: 0; list-style: none; }
+  .main > ul > li {
     margin: .65rem 0; padding: .75rem 1rem; background: var(--paper);
     border: 2.5px solid var(--ink); border-radius: 14px;
     box-shadow: 3px 3px 0 var(--teal); font-weight: 600;
   }
-  li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }
+  .main > ul > li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }
   a { color: var(--link); }
   footer {
     margin-top: 3rem; padding: 1rem 1.1rem; border: 3px solid var(--ink);
@@ -184,22 +325,31 @@
 </head>
 <body>
   <div class="page">
+  <header class="page-header">
   <h1>AI — Trending This Week</h1>
   
   <nav class="section-nav" aria-label="On this page">
-    <div class="section-pills"><a class="section-pill" href="#trending-topics">Topics<span class="count">7</span></a><a class="section-pill" href="#notable-papers">Papers<span class="count">6</span></a><a class="section-pill" href="#top-questions">Questions<span class="count">10</span></a></div>
+    <div class="section-pills"><a class="section-pill" href="#week-brief">Brief</a><a class="section-pill" href="#trending-topics">Topics<span class="count">7</span></a><a class="section-pill" href="#notable-papers">Papers<span class="count">6</span></a><a class="section-pill" href="#top-questions">Questions<span class="count">10</span></a></div>
   </nav>
 
   
   <nav class="date-nav" aria-label="Digest date">
     <div class="date-nav-row alone">
       <span class="nav-btn disabled" aria-disabled="true">← Older</span>
-      <div class="date-current">August 07, 2026</div>
+      <div class="date-current">August 08, 2026</div>
       <span class="nav-btn disabled" aria-disabled="true">Newer →</span>
     </div>
-    
   </nav>
 
+  </header>
+  <div class="body-row">
+  <div class="main">
+  
+  <section class="week-brief" id="week-brief" aria-label="Week in brief">
+    <h2>Week in brief</h2>
+    <p class="overview">This week’s conversation clustered around NeurIPS 2026 review and rebuttal turmoil; Production RAG: grounding, retrieval, and failure modes; Agent orchestration: workflows, CodeAct, and LangGraph ops; AI cybersecurity and frontier model release caution. On the research side, standouts included The Bitter Lesson of Tool Calling; Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations; TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories. People asked 10 sharp questions spanning tools, models, and how to ship.</p>
+    <p class="vs-last">First publish in the archive — no prior digest to compare.</p>
+  </section>
 
   <h2 id="trending-topics">Trending topics</h2>
   <div class="card-grid"><div class="card" id="neurips-2026-review-and-rebuttal-turmoil">
@@ -253,7 +403,7 @@
           <p>Headlines and community posts highlight generative models designing novel viruses and antibacterial agents, plus Merck building on Stanford agent-designed drug candidates. Commenters worry regulation and safeguards lag capability, echoing Anthropic’s Fable biology safeguard updates in the news cycle.</p>
         </div></div>
 
-  <h2 id="notable-papers">Notable papers</h2>
+  <h2 id="notable-papers">Notable papers <span style="font-size:.7em;font-weight:600">(this week)</span></h2>
   <div class="card-grid"><div class="card">
           <h3><a href="https://arxiv.org/abs/2608.06370v1">The Bitter Lesson of Tool Calling</a></h3>
           <p>Empirical study of programmatic (code-based) tool use versus rigid JSON tool calls on established agent benchmarks across model generations. Directly relevant to the week’s CodeAct versus production-harness debate on Reddit.</p>
@@ -281,6 +431,16 @@
     (cs.AI / cs.LG / cs.CL), summarized by AI. Links go to the original posts,
     articles, and papers.
   </footer>
+  </div>
+  
+  <aside class="timeline-rail" aria-label="Published digests">
+    <div class="timeline-card">
+      <div class="timeline-title">Timeline</div>
+      <ol class="timeline"><li class="tl-item current"><span class="tl-dot" aria-hidden="true"></span><span class="tl-link"><span class="tl-date">Aug 08</span><span class="tl-year">2026</span></span></li></ol>
+    </div>
+  </aside>
+
+  </div>
   </div>
 </body>
 </html>

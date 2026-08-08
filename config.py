@@ -63,6 +63,14 @@ NEWS_LIMIT = 25
 ARXIV_QUERY = "cat:cs.AI OR cat:cs.LG OR cat:cs.CL"
 ARXIV_LIMIT = 25
 
+# Scheduled digests run on these weekdays (UTC): 0=Monday … 6=Sunday.
+# Matches the GitHub Action cron (Friday only). Local `python run.py` still works any day.
+DIGEST_WEEKDAYS = (5,)
+
+# Notable papers refresh on the publish day (Friday). Local mid-week runs reuse cache.
+# 0=Monday … 6=Sunday, in UTC.
+PAPERS_REFRESH_WEEKDAY = 5
+
 # Cursor model for analyze.py. "composer-2.5" is the usual default; "auto" lets
 # the server pick. List available IDs with: python -c "from cursor_sdk import Cursor; print([m.id for m in Cursor.models.list()])"
 CURSOR_MODEL = "composer-2.5"
@@ -71,6 +79,7 @@ CURSOR_MODEL = "composer-2.5"
 RAW_POSTS_FILE = "raw_posts.json"
 DIGEST_FILE = "digest.json"
 OUTPUT_HTML = "index.html"
+WEEKLY_PAPERS_FILE = "weekly_papers.json"
 
 # Per-day archives so the site can navigate back and forth between digests.
 # Each run writes archive/YYYY-MM-DD/{digest.json,index.html}.

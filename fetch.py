@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import os
 import re
 import time
 import urllib.error
@@ -316,9 +317,18 @@ def fetch_posts() -> list[dict]:
     posts.extend(news)
     print(f"  news: {len(news)} articles (running total {len(posts)})")
 
-    papers = fetch_arxiv(config.ARXIV_LIMIT)
-    posts.extend(papers)
-    print(f"  arxiv: {len(papers)} papers (running total {len(posts)})")
+    # Papers are a weekly section — only hit arXiv on refresh day (or first run).
+    refresh_papers = (
+        datetime.datetime.now(tz=datetime.timezone.utc).weekday()
+        == config.PAPERS_REFRESH_WEEKDAY
+        or not os.path.isfile(config.WEEKLY_PAPERS_FILE)
+    )
+    if refresh_papers:
+        papers = fetch_arxiv(config.ARXIV_LIMIT)
+        posts.extend(papers)
+        print(f"  arxiv: {len(papers)} papers (weekly refresh; running total {len(posts)})")
+    else:
+        print("  arxiv: skipped (notable papers refresh weekly; using cache at analyze)")
 
     # Dedupe, then rank: Reddit by upvotes+comments; news/papers keep source order
     # but sit after engaged Reddit posts of similar recency.
