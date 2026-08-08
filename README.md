@@ -70,7 +70,7 @@ One Cursor agent call per run. That’s the only paid bit. Fetch + static hostin
 
 ## Deploy on GitHub Pages (daily)
 
-There’s already a workflow at `.github/workflows/daily.yml`. It runs every day at 08:00 UTC (and on manual trigger), builds the digest, commits that day’s page under `archive/YYYY-MM-DD/`, and deploys:
+There’s already a workflow at `.github/workflows/daily.yml`. It runs every day at **07:00 UK** during BST (`06:00 UTC`; that’s 06:00 UK in winter/GMT), plus on manual trigger. It builds the digest, commits that day’s page under `archive/YYYY-MM-DD/`, and deploys:
 
 - `index.html` — latest
 - `archive/…` — older days for the date nav
