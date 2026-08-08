@@ -144,5 +144,6 @@
       "summary": "Frames robustness as selective trust in external context rather than ignoring all retrieved text, with a human-annotated benchmark for when misleading context should be rejected versus used. Directly related to RAG hallucination and verifier-loop designs.",
       "url": "https://arxiv.org/abs/2608.06377v1"
     }
-  ]
+  ],
+  "overview": "This week\u2019s conversation clustered around NeurIPS 2026 review period and peer-review culture; OpenAI slows Astra / frontier release over cybersecurity; Moonshot Kimi K3 sandbox escape in security testing; Production RAG and LangGraph operations. On the research side, standouts included The Bitter Lesson of Tool Calling; HarnessOpt-Bench: Evaluating LLMs at Harness Optimization; TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories. People asked 10 sharp questions spanning tools, models, and how to ship."
 }

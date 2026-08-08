@@ -140,31 +140,54 @@ def date_nav_html(current: str, dates: list[str], *, from_archive: bool) -> str:
     else:
         next_ = '<span class="nav-btn disabled" aria-disabled="true">Newer →</span>'
 
-    # Jump chips only when there are other days — avoid duplicating today's date.
-    other_dates = [d for d in reversed(dates) if d != current]
-    if other_dates:
-        chips = []
-        for d in other_dates:
-            label = datetime.date.fromisoformat(d).strftime("%b %d")
-            href = archive_href(d, from_archive=from_archive, latest_date=latest)
-            chips.append(f'<a class="date-chip" href="{esc(href)}">{esc(label)}</a>')
-        chips_html = (
-            f'<div class="date-chips" aria-label="Other digests">{"".join(chips)}</div>'
-        )
-        row_class = "date-nav-row"
-    else:
-        chips_html = ""
-        row_class = "date-nav-row alone"
-
     return f"""
   <nav class="date-nav" aria-label="Digest date">
-    <div class="{row_class}">
+    <div class="date-nav-row alone">
       {prev}
       <div class="date-current">{esc(format_display_date(current))}</div>
       {next_}
     </div>
-    {chips_html}
   </nav>
+"""
+
+
+def timeline_html(current: str, dates: list[str], *, from_archive: bool) -> str:
+    """Right-rail vertical timeline of published digest dates (newest first)."""
+    if not dates:
+        dates = [current]
+    latest = dates[-1]
+    items = []
+    for d in reversed(dates):
+        day = datetime.date.fromisoformat(d)
+        label = day.strftime("%b %d")
+        year = day.strftime("%Y")
+        href = archive_href(d, from_archive=from_archive, latest_date=latest)
+        if d == current:
+            items.append(
+                f'<li class="tl-item current">'
+                f'<span class="tl-dot" aria-hidden="true"></span>'
+                f'<span class="tl-link">'
+                f'<span class="tl-date">{esc(label)}</span>'
+                f'<span class="tl-year">{esc(year)}</span>'
+                f"</span></li>"
+            )
+        else:
+            items.append(
+                f'<li class="tl-item">'
+                f'<span class="tl-dot" aria-hidden="true"></span>'
+                f'<a class="tl-link" href="{esc(href)}">'
+                f'<span class="tl-date">{esc(label)}</span>'
+                f'<span class="tl-year">{esc(year)}</span>'
+                f"</a></li>"
+            )
+
+    return f"""
+  <aside class="timeline-rail" aria-label="Published digests">
+    <div class="timeline-card">
+      <div class="timeline-title">Timeline</div>
+      <ol class="timeline">{"".join(items)}</ol>
+    </div>
+  </aside>
 """
 
 
@@ -180,6 +203,7 @@ def section_pills_html(digest: dict) -> str:
     papers = digest.get("notable_papers") or []
 
     pills = [
+        f'<a class="section-pill" href="#week-brief">Brief</a>',
         f'<a class="section-pill" href="#trending-topics">Topics'
         f'<span class="count">{len(topics)}</span></a>',
     ]
@@ -200,6 +224,140 @@ def section_pills_html(digest: dict) -> str:
 """
 
 
+def fallback_overview(digest: dict) -> str:
+    """Build a short week brief when the digest has no overview field yet."""
+    topics = digest.get("trending_topics") or []
+    papers = digest.get("notable_papers") or []
+    questions = digest.get("top_questions") or []
+    topic_bits = "; ".join(t["topic"] for t in topics[:4]) or "a mix of community threads"
+    paper_bits = "; ".join(p["title"] for p in papers[:3])
+    q_n = len(questions)
+    parts = [
+        f"This week’s conversation clustered around {topic_bits}.",
+    ]
+    if paper_bits:
+        parts.append(f"On the research side, standouts included {paper_bits}.")
+    parts.append(
+        f"People asked {q_n} sharp questions spanning tools, models, and how to ship."
+    )
+    return " ".join(parts)
+
+
+def _norm(text: str) -> str:
+    return re.sub(r"\s+", " ", (text or "").strip().lower())
+
+
+def _topic_keys(topic: dict) -> set[str]:
+    keys = {_norm(topic.get("topic", ""))}
+    for url in topic.get("example_urls") or []:
+        if url:
+            keys.add(_norm(url))
+    return {k for k in keys if k}
+
+
+def _question_keys(question: dict) -> set[str]:
+    keys = set()
+    if question.get("source_url"):
+        keys.add(_norm(question["source_url"]))
+    if question.get("question"):
+        keys.add(_norm(question["question"]))
+    return keys
+
+
+def _paper_keys(paper: dict) -> set[str]:
+    keys = set()
+    if paper.get("url"):
+        keys.add(_norm(paper["url"]))
+    if paper.get("title"):
+        keys.add(_norm(paper["title"]))
+    return keys
+
+
+def _overlap_count(current: list[dict], previous: list[dict], key_fn) -> int:
+    """Count current items that share any identity key with a previous item."""
+    prev_keys: set[str] = set()
+    for item in previous:
+        prev_keys |= key_fn(item)
+    if not prev_keys:
+        return 0
+    matched = 0
+    for item in current:
+        if key_fn(item) & prev_keys:
+            matched += 1
+    return matched
+
+
+def load_previous_digest(current_date: str, dates: list[str]) -> tuple[str | None, dict | None]:
+    """Return (previous_date, digest) for the publish before current_date."""
+    if current_date not in dates:
+        older = [d for d in dates if d < current_date]
+    else:
+        idx = dates.index(current_date)
+        older = dates[:idx]
+    if not older:
+        return None, None
+    prev_date = older[-1]
+    path = os.path.join(config.ARCHIVE_DIR, prev_date, "digest.json")
+    if not os.path.isfile(path):
+        return prev_date, None
+    with open(path) as f:
+        return prev_date, json.load(f)
+
+
+def compare_to_previous(digest: dict, previous: dict | None) -> dict[str, int] | None:
+    if not previous:
+        return None
+    return {
+        "topics": _overlap_count(
+            digest.get("trending_topics") or [],
+            previous.get("trending_topics") or [],
+            _topic_keys,
+        ),
+        "questions": _overlap_count(
+            digest.get("top_questions") or [],
+            previous.get("top_questions") or [],
+            _question_keys,
+        ),
+        "papers": _overlap_count(
+            digest.get("notable_papers") or [],
+            previous.get("notable_papers") or [],
+            _paper_keys,
+        ),
+    }
+
+
+def week_brief_html(
+    digest: dict,
+    *,
+    prev_date: str | None = None,
+    overlap: dict[str, int] | None = None,
+) -> str:
+    overview = (digest.get("overview") or "").strip() or fallback_overview(digest)
+    topics_n = len(digest.get("trending_topics") or [])
+    questions_n = len(digest.get("top_questions") or [])
+    papers_n = len(digest.get("notable_papers") or [])
+
+    if overlap and prev_date:
+        label = format_display_date(prev_date)
+        delta = f"""
+    <p class="vs-last">
+      Same as last publish ({esc(label)}):
+      <span>{overlap['topics']} of {topics_n} topics</span>
+      <span>{overlap['questions']} of {questions_n} questions</span>
+      <span>{overlap['papers']} of {papers_n} papers</span>
+    </p>"""
+    else:
+        delta = '<p class="vs-last">First publish in the archive — no prior digest to compare.</p>'
+
+    return f"""
+  <section class="week-brief" id="week-brief" aria-label="Week in brief">
+    <h2>Week in brief</h2>
+    <p class="overview">{esc(overview)}</p>
+    {delta}
+  </section>
+"""
+
+
 def render(
     digest: dict,
     *,
@@ -207,7 +365,10 @@ def render(
     dates: list[str],
     from_archive: bool,
 ) -> str:
+    prev_date, prev_digest = load_previous_digest(date_iso, dates)
+    overlap = compare_to_previous(digest, prev_digest)
     section_nav = section_pills_html(digest)
+    week_brief = week_brief_html(digest, prev_date=prev_date, overlap=overlap)
 
     topics_html = "".join(
         f"""<div class="card" id="{esc(slugify(t['topic']))}">
@@ -236,7 +397,7 @@ def render(
     )
     papers_section = (
         f"""
-  <h2 id="notable-papers">Notable papers</h2>
+  <h2 id="notable-papers">Notable papers <span style="font-size:.7em;font-weight:600">(this week)</span></h2>
   <div class="card-grid">{papers_html}</div>
 """
         if papers
@@ -244,6 +405,7 @@ def render(
     )
 
     nav = date_nav_html(date_iso, dates, from_archive=from_archive)
+    timeline = timeline_html(date_iso, dates, from_archive=from_archive)
     display = format_display_date(date_iso)
     favicon_href = "../../favicon.svg" if from_archive else "favicon.svg"
 
@@ -289,10 +451,108 @@ def render(
     min-height: 100vh;
   }}
   .page {{
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 2rem 1rem 3rem;
   }}
+  .page-header {{ margin-bottom: .25rem; }}
+  .body-row {{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
+    align-items: start;
+  }}
+  .main {{ min-width: 0; }}
+  .timeline-rail {{
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    margin-top: 2.5rem; /* match first h2 so rail lines up with content body */
+  }}
+  .timeline-card {{
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--coral);
+    padding: .85rem .75rem 1rem;
+  }}
+  .timeline-title {{
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .85rem;
+    text-align: center;
+    padding: .2rem .4rem;
+    background: var(--mango);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+  }}
+  .timeline {{
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.85rem;
+    position: relative;
+  }}
+  .timeline::before {{
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: .35rem;
+    bottom: .35rem;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }}
+  .tl-item {{
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-weight: 700;
+  }}
+  .tl-item:last-child {{ margin-bottom: 0; }}
+  .tl-item:hover {{ transform: none; box-shadow: none; }}
+  .tl-dot {{
+    position: absolute;
+    left: -0.72rem;
+    top: .45rem;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    z-index: 1;
+  }}
+  .tl-item.current .tl-dot {{
+    background: var(--coral);
+    box-shadow: 0 0 0 3px #ff5a5f44;
+  }}
+  .tl-link {{
+    display: flex;
+    flex-direction: column;
+    gap: .05rem;
+    padding: .35rem .5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1.2;
+  }}
+  a.tl-link:hover {{
+    background: var(--sky);
+    border-color: var(--ink);
+    color: var(--ink);
+  }}
+  .tl-item.current .tl-link {{
+    background: var(--ink);
+    color: var(--mango);
+    border-color: var(--ink);
+  }}
+  .tl-date {{ font-size: .88rem; }}
+  .tl-year {{ font-size: .7rem; opacity: .75; font-weight: 600; }}
+  .tl-item.current .tl-year {{ color: #ffe8a3; opacity: 1; }}
   h1 {{
     font-family: "Fredoka", "Nunito", sans-serif;
     font-weight: 700;
@@ -318,6 +578,7 @@ def render(
   }}
   .section-pill:nth-child(2) {{ background: var(--mango); }}
   .section-pill:nth-child(3) {{ background: var(--sky); }}
+  .section-pill:nth-child(4) {{ background: var(--lime); }}
   .section-pill:hover {{
     transform: translate(-2px, -2px);
     box-shadow: 5px 5px 0 var(--ink);
@@ -326,6 +587,40 @@ def render(
   .section-pill .count {{
     font-size: .72rem; font-weight: 800; padding: .1rem .4rem;
     border-radius: 8px; background: var(--ink); color: var(--mango);
+  }}
+  .week-brief {{
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.2rem 1.25rem;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--teal);
+  }}
+  .week-brief h2 {{
+    margin-top: 0;
+    background: var(--coral);
+    color: #fff;
+  }}
+  .week-brief .overview {{
+    margin: .85rem 0 .75rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+  }}
+  .week-brief .vs-last {{
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem .55rem;
+    align-items: center;
+    font-size: .88rem;
+    font-weight: 700;
+  }}
+  .week-brief .vs-last span {{
+    display: inline-block;
+    padding: .2rem .55rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: #fff;
   }}
   .date-nav {{
     margin-bottom: 1.25rem; padding: .4rem .7rem; border: 2.5px solid var(--ink);
@@ -350,14 +645,6 @@ def render(
   }}
   .date-nav-row .nav-btn:last-child {{ text-align: right; }}
   .nav-btn.disabled {{ color: #1a152366; pointer-events: none; }}
-  .date-chips {{ display: flex; flex-wrap: wrap; gap: .3rem; justify-content: flex-end; }}
-  .date-chip {{
-    font-size: .7rem; font-weight: 700; padding: .1rem .45rem; border-radius: 8px;
-    background: #fff; color: var(--ink); text-decoration: none;
-    border: 2px solid var(--ink); line-height: 1.2;
-  }}
-  .date-chip:hover {{ background: var(--sky); }}
-  .date-chip.current {{ background: var(--coral); color: #fff; }}
   h2 {{
     font-family: "Fredoka", "Nunito", sans-serif;
     font-weight: 700; font-size: 1.65rem; margin-top: 2.5rem;
@@ -370,8 +657,24 @@ def render(
   #notable-papers {{ background: var(--sky); }}
   .card-grid {{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
                column-gap: .85rem; row-gap: 4rem; margin: .85rem 0 1.25rem; }}
-  @media (max-width: 1000px) {{
+  @media (max-width: 1100px) {{
     .card-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+  }}
+  @media (max-width: 860px) {{
+    .body-row {{ grid-template-columns: 1fr; }}
+    .timeline-rail {{
+      position: static;
+      order: -1;
+      margin-top: 0;
+      margin-bottom: .5rem;
+    }}
+    .timeline {{
+      display: flex; flex-wrap: wrap; gap: .5rem; padding: 0;
+    }}
+    .timeline::before {{ display: none; }}
+    .tl-item {{ margin: 0; }}
+    .tl-dot {{ display: none; }}
+    .tl-link {{ flex-direction: row; align-items: baseline; gap: .35rem; }}
   }}
   @media (max-width: 640px) {{
     .card-grid {{ grid-template-columns: 1fr; }}
@@ -416,13 +719,13 @@ def render(
   }}
   .src:hover {{ background: var(--mango); color: var(--ink); }}
   .src-icon {{ width: 1rem; height: 1rem; flex-shrink: 0; }}
-  ul {{ padding-left: 0; list-style: none; }}
-  li {{
+  .main > ul {{ padding-left: 0; list-style: none; }}
+  .main > ul > li {{
     margin: .65rem 0; padding: .75rem 1rem; background: var(--paper);
     border: 2.5px solid var(--ink); border-radius: 14px;
     box-shadow: 3px 3px 0 var(--teal); font-weight: 600;
   }}
-  li:hover {{ transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }}
+  .main > ul > li:hover {{ transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }}
   a {{ color: var(--link); }}
   footer {{
     margin-top: 3rem; padding: 1rem 1.1rem; border: 3px solid var(--ink);
@@ -433,10 +736,14 @@ def render(
 </head>
 <body>
   <div class="page">
+  <header class="page-header">
   <h1>AI — Trending This Week</h1>
   {section_nav}
   {nav}
-
+  </header>
+  <div class="body-row">
+  <div class="main">
+  {week_brief}
   <h2 id="trending-topics">Trending topics</h2>
   <div class="card-grid">{topics_html}</div>
 {papers_section}
@@ -447,6 +754,9 @@ def render(
     (cs.AI / cs.LG / cs.CL), summarized by AI. Links go to the original posts,
     articles, and papers.
   </footer>
+  </div>
+  {timeline}
+  </div>
   </div>
 </body>
 </html>"""

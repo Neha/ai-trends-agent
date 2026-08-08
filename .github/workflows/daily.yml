@@ -1,12 +1,14 @@
-name: Daily AI trends agent
+name: AI trends digest
 
-# Runs once a day and on manual trigger. Builds index.html, archives the day,
-# and publishes the site (including prior days) to GitHub Pages.
+# Runs Friday and on manual trigger. Builds index.html, archives the day, and
+# publishes the site (including prior days) to GitHub Pages.
 # Set CURSOR_API_KEY in: repo Settings → Secrets and variables
 # → Actions → New repository secret.
 on:
   schedule:
-    - cron: "0 6 * * *" # 06:00 UTC = 07:00 UK during BST (06:00 UK in winter/GMT)
+    # 06:00 UTC = 07:00 UK during BST (06:00 UK in winter/GMT)
+    # 5=Friday
+    - cron: "0 6 * * 5"
   workflow_dispatch: {}
 
 permissions:
@@ -39,7 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html favicon.svg archive/
+          git add index.html favicon.svg archive/ weekly_papers.json
           if git diff --staged --quiet; then
             echo "No archive changes to commit"
           else

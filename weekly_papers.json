@@ -1,0 +1,36 @@
+{
+  "week": "2026-W32",
+  "updated": "2026-08-08",
+  "notable_papers": [
+    {
+      "title": "The Bitter Lesson of Tool Calling",
+      "summary": "Empirical study across model generations compares rigid JSON tool calls with programmatic tool use in code, arguing that letting models script chained and parallel tool logic better matches how capable coding models already work. Relevant to the ongoing CodeAct versus ReAct debate in agent frameworks.",
+      "url": "https://arxiv.org/abs/2608.06370v1"
+    },
+    {
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+      "summary": "Introduces a benchmark for automated, evaluation-guided improvement of the full agent harness\u2014prompts, tools, control flow, and memory\u2014not just model weights. Highlights that agent quality is increasingly a systems optimization problem.",
+      "url": "https://arxiv.org/abs/2608.06301v1"
+    },
+    {
+      "title": "TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories",
+      "summary": "Targets debugging long agent runs by locating the earliest trajectory step that causes final failure, addressing cascading errors that are hard to spot in lengthy contexts. Aligns with community interest in evals and production agent reliability.",
+      "url": "https://arxiv.org/abs/2608.06346v1"
+    },
+    {
+      "title": "Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations",
+      "summary": "Critiques chunk-and-embed top-k RAG on structured financial and regulatory documents where most lines are tables, and proposes measurable agentic retrieval operations instead of pure vector similarity. Speaks to finance, tax, and compliance RAG threads this week.",
+      "url": "https://arxiv.org/abs/2608.06305v1"
+    },
+    {
+      "title": "NeSy-RAG: Neuro-Symbolic RAG for Explainable Question Answering",
+      "summary": "Combines retrieval-augmented generation with neuro-symbolic reasoning so answers can be attributed to evidence and missing user-specific context is detected systematically. Matches practitioner demand for grounded, auditable RAG.",
+      "url": "https://arxiv.org/abs/2608.06292v1"
+    },
+    {
+      "title": "Learning When to Trust via Selective Context Preference Optimization",
+      "summary": "Frames robustness as selective trust in external context rather than ignoring all retrieved text, with a human-annotated benchmark for when misleading context should be rejected versus used. Directly related to RAG hallucination and verifier-loop designs.",
+      "url": "https://arxiv.org/abs/2608.06377v1"
+    }
+  ]
+}
