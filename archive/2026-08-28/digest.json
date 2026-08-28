@@ -1,0 +1,149 @@
+{
+  "overview": "This week\u2019s conversation split between conference integrity (AAAI reproducibility and review collusion), the gap between agent demos and production (LangGraph on Kubernetes, governance outside prompts, idempotent tool calls), and growing frustration with OpenAI Pro marketing versus hidden usage caps. Headlines centered on a court ruling against the Pentagon\u2019s Anthropic blacklist, OpenAI\u2019s Jalape\u00f1o inference chip and GPT-5.6 Sol preview, Anthropic\u2019s hardware-standard and scientist-access moves, and reported Nvidia interest in Hugging Face\u2014alongside steady chatter on Qwen3.8-Flash and GLM-5.3 for local and agentic coding. Practitioners asked where control should live for autonomous agents, how to recover long runs after failures, and whether frameworks like LangChain are worth the complexity versus calling APIs directly.",
+  "trending_topics": [
+    {
+      "topic": "AAAI 2027 peer review and reproducibility",
+      "summary": "Reviewers debated rejecting empirical submissions that ship without code or data despite venue rules, and whether missing artifacts should be an automatic reject. A separate thread discussed organizer warnings about bid collusion and two-cycle review pairs, and whether geographic concentration makes innocent-looking cycles common.",
+      "post_count": 5,
+      "example_urls": [
+        "https://reddit.com/r/MachineLearning/comments/1vxryws/reviewing_4_papers_for_aaai_2027_and_none_have/",
+        "https://reddit.com/r/MachineLearning/comments/1vwujcy/aaai_2027_reviewer_bidding_and_assignment/",
+        "https://reddit.com/r/MachineLearning/comments/1vx3why/does_registering_an_abstract_not_the_full/"
+      ]
+    },
+    {
+      "topic": "Production agents: LangGraph, hosting, and realism",
+      "summary": "Builders compared self-hosted LangGraph on EKS against Agent Server and custom workers, emphasizing checkpoint persistence, reconnectable streaming, cancellation, and tenant isolation. A widely shared sentiment was that multi-agent systems in production often reduce to capped loops and a few API calls, with observability and loop prevention dominating day-to-day work.",
+      "post_count": 12,
+      "example_urls": [
+        "https://reddit.com/r/LangChain/comments/1vyq9h9/how_are_you_selfhosting_langgraph_or_deepagents/",
+        "https://reddit.com/r/LangChain/comments/1vyb6n1/multiagent_in_production_is_mostly_just/",
+        "https://reddit.com/r/LangChain/comments/1vzhi4a/before_trying_langchain_try_using_llm_apis/"
+      ]
+    },
+    {
+      "topic": "Agent governance and tool-call safety",
+      "summary": "Threads argued that prompts cannot enforce constitutional boundaries when agents can move money, query databases, or call APIs, pushing interest in middleware that verifies identity, permissions, and audit trails before execution. Related posts covered securing LangGraph tool nodes against hallucinated destructive calls and handling ambiguous outcomes when a tool times out but may have succeeded.",
+      "post_count": 9,
+      "example_urls": [
+        "https://reddit.com/r/LangChain/comments/1vwtn4n/should_governance_live_in_the_prompt_inside_the/",
+        "https://reddit.com/r/LangChain/comments/1vwfjrm/what_do_you_do_when_a_tool_call_times_out_but/",
+        "https://reddit.com/r/LangChain/comments/1vw8uew/how_are_you_securing_your_langgraph_tool_nodes/"
+      ]
+    },
+    {
+      "topic": "OpenAI Pro, limits, and monetization trust",
+      "summary": "Users reported hitting undisclosed caps on ChatGPT Pro image generation despite \u201cunlimited\u201d pricing language, with support citing generic usage allowances. Broader complaint threads covered cross-tool rate limits on free tiers, UI churn, and news that OpenAI is testing ads on select plans in India.",
+      "post_count": 8,
+      "example_urls": [
+        "https://reddit.com/r/MachineLearning/comments/1vws3r0/openai_advertises_unlimited_image_generation_in/",
+        "https://reddit.com/r/ChatGPT/comments/1w0vj4s/textonly_chat_is_triggering_attachment_limits/",
+        "https://reddit.com/r/ChatGPT/comments/1w0oi0j/temporary_rate_limit_chat_pauses_after_34/"
+      ]
+    },
+    {
+      "topic": "Anthropic vs Pentagon and industry cyber warnings",
+      "summary": "Major outlets and Reddit alike covered a judge ruling the administration\u2019s Anthropic supply-chain blacklist unlawful and baseless. In parallel, OpenAI, Google, Anthropic, and others publicly urged urgent preparation for AI-enabled cyber threats against critical infrastructure.",
+      "post_count": 6,
+      "example_urls": [
+        "https://reddit.com/r/singularity/comments/1w0ek6o/judge_blocks_pentagon_blacklist_of_anthropic_as/",
+        "https://reddit.com/r/singularity/comments/1w0t2my/openai_google_join_dozens_of_tech_companies_to/",
+        "https://reddit.com/r/singularity/comments/1w0mn1a/judge_says_pentagons_measures_against_anthropic/"
+      ]
+    },
+    {
+      "topic": "Open weights, sovereign AI, and quirky training",
+      "summary": "Unbounded Labs\u2019 \u201cBartholomew\u201d vintage LLM trained on pre-1931 English drew interest as a low-budget from-scratch demo, while TRI-FAIR Lab\u2019s Thomson report framed continual learning on frontier-scale open weights for sovereign AI. Local and cloud model threads focused on Qwen3.8-Flash-Next, GLM-5.3-Flash, and inference efficiency experiments.",
+      "post_count": 7,
+      "example_urls": [
+        "https://reddit.com/r/MachineLearning/comments/1vx94er/bart_a_vintage_llm_r/",
+        "https://reddit.com/r/MachineLearning/comments/1vxvzju/continual_learning_of_frontier_models_for/",
+        "https://reddit.com/r/LocalLLaMA/comments/1w0tgzl/zaiorgglm53_hugging_face/"
+      ]
+    },
+    {
+      "topic": "When ML meets messy real-world archives",
+      "summary": "An author-shared digitization story recovered hundreds of thousands of manual crop labels from years of Photoshop work on Urdu library scans, finding that more data, ResNet-50, and higher resolution lost to a simple ten-click operator workflow. A Papers with Code post described hybrid keyword plus pgvector semantic search with Qwen3 embeddings as their production retrieval stack.",
+      "post_count": 3,
+      "example_urls": [
+        "https://reddit.com/r/MachineLearning/comments/1vz2ojw/we_recovered_575k_crop_labels_from_a_decade_of/",
+        "https://reddit.com/r/MachineLearning/comments/1vxyrsr/how_we_built_a_sota_search_engine_using/",
+        "https://reddit.com/r/MachineLearning/comments/1vym6cn/catching_bugs_in_scikitlearn_d/"
+      ]
+    }
+  ],
+  "top_questions": [
+    {
+      "question": "For AAAI 2027 reviews, should missing code/data for empirical claims be treated as grounds for rejection when the checklist requires artifacts at submission?",
+      "source_url": "https://reddit.com/r/MachineLearning/comments/1vxryws/reviewing_4_papers_for_aaai_2027_and_none_have/"
+    },
+    {
+      "question": "How are you self-hosting LangGraph or DeepAgents in production on Kubernetes with recovery after pod failures, persistent checkpoints, reconnectable streaming, reliable cancellation, and tenant isolation?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vyq9h9/how_are_you_selfhosting_langgraph_or_deepagents/"
+    },
+    {
+      "question": "What should you do when an agent tool call times out with no confirmation but no proof of failure\u2014retry, or treat the action as pending to avoid duplicate side effects?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vwfjrm/what_do_you_do_when_a_tool_call_times_out_but/"
+    },
+    {
+      "question": "Should governance for autonomous agents live in the prompt, inside the agent, or in a separate layer between the agent and execution?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vwtn4n/should_governance_live_in_the_prompt_inside_the/"
+    },
+    {
+      "question": "Do production AI agents need a separate \"conclusion state\" layer so downstream steps know whether an earlier security or policy decision is still valid?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vz5lmy/do_production_ai_agents_need_a_separate/"
+    },
+    {
+      "question": "How are you securing LangGraph tool nodes so a hallucinated LLM cannot run destructive database queries or leak PII through APIs?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vw8uew/how_are_you_securing_your_langgraph_tool_nodes/"
+    },
+    {
+      "question": "Is Deep Agent an open-source alternative to Claude Code?",
+      "source_url": "https://reddit.com/r/LangChain/comments/1vx6tbb/deep_agent_vs_claude_code/"
+    },
+    {
+      "question": "For a medicine-reminder agent under incomplete information, how should \"remind / wait / notify caregiver\" be modeled before implementation?",
+      "source_url": "https://reddit.com/r/MachineLearning/comments/1vy8a9g/d_looking_for_advice_modelling_a_medicinereminder/"
+    },
+    {
+      "question": "In multi-agent RL comparisons, must hyperparameters be unified across architectures for a fair study when each scenario couple prefers different settings?",
+      "source_url": "https://reddit.com/r/MachineLearning/comments/1vxfmms/hyperparameters_fine_tuning_for_marl_comparative/"
+    },
+    {
+      "question": "Where does LLM document analysis and audit actually break down in heavily regulated enterprise or Big Four-style deployments?",
+      "source_url": "https://reddit.com/r/MachineLearning/comments/1vz3jbp/r_where_does_llm_document_analysisaudit_actually/"
+    }
+  ],
+  "notable_papers": [
+    {
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization",
+      "summary": "Introduces a benchmark for how well LLMs can iteratively improve the surrounding agent harness\u2014prompts, tools, control flow, and memory\u2014rather than only raw model weights. Treats harness tuning as a first-class capability for agentic deployments.",
+      "url": "https://arxiv.org/abs/2608.06301v1"
+    },
+    {
+      "title": "TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories",
+      "summary": "Targets debugging in long agent runs by locating the earliest trajectory step that causally leads to final failure, instead of only scoring outcomes. Aims to make cascading agent errors easier to attribute and fix.",
+      "url": "https://arxiv.org/abs/2608.06346v1"
+    },
+    {
+      "title": "The Bitter Lesson of Tool Calling",
+      "summary": "Empirically compares programmatic tool use (code that chains and parallelizes calls) against classic JSON tool-calling on a standard benchmark across model generations. Connects to the community debate on why CodeAct-style patterns have not dominated production stacks.",
+      "url": "https://arxiv.org/abs/2608.06370v1"
+    },
+    {
+      "title": "Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations",
+      "summary": "Argues that chunk-and-embed top-k retrieval breaks on table-heavy financial and regulatory documents, and proposes measurable agentic document operations as an alternative. Relevant to practitioners building RAG over structured long reports.",
+      "url": "https://arxiv.org/abs/2608.06305v1"
+    },
+    {
+      "title": "On-Policy Self-Distillation without Any Supervision",
+      "summary": "Shows post-training self-distillation can run on-policy without external labels, environment rewards, or a larger teacher model. Pushes toward genuinely self-contained refinement loops for LLMs.",
+      "url": "https://arxiv.org/abs/2608.06296v1"
+    },
+    {
+      "title": "Resourced Authority: A Mechanism-Design Model for Participatory Governance of Deployed AI Agents",
+      "summary": "Formalizes ongoing governance of deployed agents through resource budgets so authorization is enforced by compute limits rather than policy text alone. Aligns with production threads on fail-closed agent authorization and governance.",
+      "url": "https://arxiv.org/abs/2608.06353v1"
+    }
+  ]
+}
