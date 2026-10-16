@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI — Trending This Week · October 16, 2026</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1523;
+    --paper: #fff8ef;
+    --card: #ffffff;
+    --coral: #ff5a5f;
+    --mango: #ffb703;
+    --lime: #8fd94f;
+    --teal: #00c2a8;
+    --sky: #4cc9f0;
+    --link: #0b6e4f;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Nunito", "Trebuchet MS", sans-serif;
+    line-height: 1.55;
+    background-color: #ffe8a3;
+    background-image:
+      radial-gradient(circle at 12% 18%, #ff8fab55 0 18%, transparent 19%),
+      radial-gradient(circle at 88% 12%, #4cc9f055 0 16%, transparent 17%),
+      radial-gradient(circle at 80% 78%, #8fd94f55 0 20%, transparent 21%),
+      radial-gradient(circle at 18% 82%, #ffb70366 0 14%, transparent 15%),
+      repeating-linear-gradient(
+        -18deg,
+        #ffe8a3 0 14px,
+        #ffd56b 14px 28px
+      );
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+  }
+  .page-header { margin-bottom: .25rem; }
+  .body-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main { min-width: 0; }
+  .timeline-rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    margin-top: 2.5rem; /* match first h2 so rail lines up with content body */
+  }
+  .timeline-card {
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--coral);
+    padding: .85rem .75rem 1rem;
+  }
+  .timeline-title {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .85rem;
+    text-align: center;
+    padding: .2rem .4rem;
+    background: var(--mango);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.85rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: .35rem;
+    bottom: .35rem;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-weight: 700;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item:hover { transform: none; box-shadow: none; }
+  .tl-dot {
+    position: absolute;
+    left: -0.72rem;
+    top: .45rem;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    z-index: 1;
+  }
+  .tl-item.current .tl-dot {
+    background: var(--coral);
+    box-shadow: 0 0 0 3px #ff5a5f44;
+  }
+  .tl-link {
+    display: flex;
+    flex-direction: column;
+    gap: .05rem;
+    padding: .35rem .5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  a.tl-link:hover {
+    background: var(--sky);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tl-item.current .tl-link {
+    background: var(--ink);
+    color: var(--mango);
+    border-color: var(--ink);
+  }
+  .tl-date { font-size: .88rem; }
+  .tl-year { font-size: .7rem; opacity: .75; font-weight: 600; }
+  .tl-item.current .tl-year { color: #ffe8a3; opacity: 1; }
+  h1 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 .85rem;
+    display: inline-block;
+    padding: .2rem .55rem .35rem;
+    background: var(--ink);
+    color: var(--mango);
+    transform: rotate(-1.2deg);
+    box-shadow: 6px 6px 0 var(--coral);
+  }
+  .section-nav { margin-bottom: 1.25rem; }
+  .section-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .section-pill {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .4rem .8rem; border-radius: 12px; text-decoration: none;
+    font-size: .85rem; font-weight: 700; border: 2.5px solid var(--ink);
+    color: var(--ink); background: var(--teal);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .section-pill:nth-child(2) { background: var(--mango); }
+  .section-pill:nth-child(3) { background: var(--sky); }
+  .section-pill:nth-child(4) { background: var(--lime); }
+  .section-pill:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--ink);
+    color: var(--ink);
+  }
+  .section-pill .count {
+    font-size: .72rem; font-weight: 800; padding: .1rem .4rem;
+    border-radius: 8px; background: var(--ink); color: var(--mango);
+  }
+  .week-brief {
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.2rem 1.25rem;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--teal);
+  }
+  .week-brief h2 {
+    margin-top: 0;
+    background: var(--coral);
+    color: #fff;
+  }
+  .week-brief .overview {
+    margin: .85rem 0 .75rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .week-brief .vs-last {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem .55rem;
+    align-items: center;
+    font-size: .88rem;
+    font-weight: 700;
+  }
+  .week-brief .vs-last span {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .date-nav {
+    margin-bottom: 1.25rem; padding: .4rem .7rem; border: 2.5px solid var(--ink);
+    border-radius: 12px; background: var(--paper);
+    box-shadow: 3px 3px 0 var(--coral);
+  }
+  .date-nav-row { display: flex; align-items: center; justify-content: space-between;
+                  gap: .5rem; margin-bottom: .3rem; }
+  .date-nav-row.alone { margin-bottom: 0; }
+  .date-current {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; text-align: center; flex: 1; font-size: .95rem;
+    line-height: 1.2;
+  }
+  .nav-btn {
+    font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--ink);
+    white-space: nowrap; min-width: 5rem; padding: .15rem .35rem;
+    border-radius: 8px; border: 2px solid transparent; line-height: 1.2;
+  }
+  .nav-btn:hover:not(.disabled) {
+    background: var(--lime); border-color: var(--ink);
+  }
+  .date-nav-row .nav-btn:last-child { text-align: right; }
+  .nav-btn.disabled { color: #1a152366; pointer-events: none; }
+  h2 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; font-size: 1.65rem; margin-top: 2.5rem;
+    scroll-margin-top: 1rem; display: inline-block;
+    padding: .15rem .55rem; background: var(--mango);
+    border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-0.6deg);
+  }
+  #top-questions { background: var(--lime); }
+  #notable-papers { background: var(--sky); }
+  .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+               column-gap: .85rem; row-gap: 4rem; margin: .85rem 0 1.25rem; }
+  @media (max-width: 1100px) {
+    .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .body-row { grid-template-columns: 1fr; }
+    .timeline-rail {
+      position: static;
+      order: -1;
+      margin-top: 0;
+      margin-bottom: .5rem;
+    }
+    .timeline {
+      display: flex; flex-wrap: wrap; gap: .5rem; padding: 0;
+    }
+    .timeline::before { display: none; }
+    .tl-item { margin: 0; }
+    .tl-dot { display: none; }
+    .tl-link { flex-direction: row; align-items: baseline; gap: .35rem; }
+  }
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    h1 { transform: none; }
+  }
+  .card {
+    border: 3px solid var(--ink); border-radius: 16px; padding: 1rem 1.15rem;
+    margin: 0; scroll-margin-top: 1rem; height: 100%;
+    display: flex; flex-direction: column; background: var(--card);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .card:nth-child(4n+1) { background: #fff7fb; }
+  .card:nth-child(4n+2) { background: #f3fffa; }
+  .card:nth-child(4n+3) { background: #fffbeb; }
+  .card:nth-child(4n+4) { background: #f2fbff; }
+  .card:hover {
+    transform: translate(-3px, -3px) rotate(-0.5deg);
+    box-shadow: 8px 8px 0 var(--coral);
+  }
+  .card:nth-child(even):hover {
+    transform: translate(-3px, -3px) rotate(0.5deg);
+    box-shadow: 8px 8px 0 var(--teal);
+  }
+  .card:target { outline: 3px solid var(--mango); outline-offset: 3px; }
+  .card h3 {
+    margin: 0 0 .45rem;
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 600; font-size: 1.05rem; line-height: 1.25;
+  }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--link); text-decoration: underline; }
+  .card p { margin: 0; flex: 1; font-size: .92rem; }
+  .card .meta { margin: 0 0 .65rem; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .55rem;
+          font-size: .85rem; color: #5a5160; font-weight: 600; }
+  .src {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .15rem .55rem .15rem .3rem; border-radius: 10px;
+    background: #fff; color: inherit; text-decoration: none;
+    font-size: .78rem; border: 2px solid var(--ink); font-weight: 700;
+  }
+  .src:hover { background: var(--mango); color: var(--ink); }
+  .src-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
+  .main > ul { padding-left: 0; list-style: none; }
+  .main > ul > li {
+    margin: .65rem 0; padding: .75rem 1rem; background: var(--paper);
+    border: 2.5px solid var(--ink); border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--teal); font-weight: 600;
+  }
+  .main > ul > li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }
+  a { color: var(--link); }
+  footer {
+    margin-top: 3rem; padding: 1rem 1.1rem; border: 3px solid var(--ink);
+    border-radius: 16px; background: var(--ink); color: #ffe8a3;
+    font-size: .9rem; font-weight: 600; box-shadow: 5px 5px 0 var(--mango);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+  <header class="page-header">
+  <h1>AI — Trending This Week</h1>
+  
+  <nav class="section-nav" aria-label="On this page">
+    <div class="section-pills"><a class="section-pill" href="#week-brief">Brief</a><a class="section-pill" href="#trending-topics">Topics<span class="count">7</span></a><a class="section-pill" href="#notable-papers">Papers<span class="count">6</span></a><a class="section-pill" href="#top-questions">Questions<span class="count">10</span></a></div>
+  </nav>
+
+  
+  <nav class="date-nav" aria-label="Digest date">
+    <div class="date-nav-row alone">
+      <a class="nav-btn" href="../2026-10-09/">← October 09, 2026</a>
+      <div class="date-current">October 16, 2026</div>
+      <span class="nav-btn disabled" aria-disabled="true">Newer →</span>
+    </div>
+  </nav>
+
+  </header>
+  <div class="body-row">
+  <div class="main">
+  
+  <section class="week-brief" id="week-brief" aria-label="Week in brief">
+    <h2>Week in brief</h2>
+    <p class="overview">This week’s conversation was dominated by Meta’s Muse Spark Open release as the headline US open-weight drop, alongside steady chatter about frontier benchmarks (Gemini 4 Argon, Claude Fable 5.5) and agent failures in the wild. Reddit also fixated on the new Tesla Roadster reveal as a symbol of accelerating “sci-fi” hardware hype. Academic and ML communities debated ICLR review quality, AI-written submissions, and whether PhD work still feels worthwhile when models can draft papers. News threads reinforced a cooler tone on AI capex—CoreWeave debt, banks offloading datacenter exposure, and tempered Anthropic IPO expectations—while regulators and incidents (FTC document demands, rogue agent reports, state lawsuits) kept safety and containment in the background.</p>
+    
+    <p class="vs-last">
+      Same as last publish (October 09, 2026):
+      <span>0 of 7 topics</span>
+      <span>0 of 10 questions</span>
+      <span>6 of 6 papers</span>
+    </p>
+  </section>
+
+  <h2 id="trending-topics">Trending topics</h2>
+  <div class="card-grid"><div class="card" id="meta-muse-spark-open">
+          <div class="meta">
+            <span>8 posts</span>
+            <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1x6r9pz/introducing_muse_spark_open_the_most_capable_us/" title="https://reddit.com/r/LocalLLaMA/comments/1x6r9pz/introducing_muse_spark_open_the_most_capable_us/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6se5a/meta_has_released_muse_spark_open_the_most/" title="https://reddit.com/r/singularity/comments/1x6se5a/meta_has_released_muse_spark_open_the_most/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1x6rcid/unsloth_muse_spark_open_is_out/" title="https://reddit.com/r/LocalLLaMA/comments/1x6rcid/unsloth_muse_spark_open_is_out/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a>
+          </div>
+          <h3>Meta Muse Spark Open</h3>
+          <p>Meta’s Muse Spark Open drew heavy interest in local and agentic circles as a large US open-weight model positioned for coding, long-horizon tasks, and multimodal use, with specs like 816B total / 42B active parameters and a 1M-token context window. Follow-on posts covered Unsloth support, GGUF merges in llama.cpp, and comparisons to closed APIs like Muse Wonder.</p>
+        </div><div class="card" id="frontier-model-scores-and-upcoming-claude">
+          <div class="meta">
+            <span>5 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1x6j76i/gemini_4_argon_scores_165_on_the_epoch/" title="https://reddit.com/r/singularity/comments/1x6j76i/gemini_4_argon_scores_165_on_the_epoch/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/claude/comments/1x6q9j9/claude_fable_55_reaches_anthropic_partners_with_a/" title="https://reddit.com/r/claude/comments/1x6q9j9/claude_fable_55_reaches_anthropic_partners_with_a/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/claude</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6rcox/gemini_4_argon_scoring_close_to_gpt_6_astra_with/" title="https://reddit.com/r/singularity/comments/1x6rcox/gemini_4_argon_scoring_close_to_gpt_6_astra_with/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Frontier model scores and upcoming Claude</h3>
+          <p>Benchmark and leak discussion centered on Gemini 4 Argon landing near the top of the Epoch Capabilities Index and on Claude Fable 5.5 reaching partners ahead of a possible launch. Community threads tied these moves to cost-efficiency on hard reasoning benchmarks and to anticipation of the next Anthropic tier.</p>
+        </div><div class="card" id="tesla-roadster-and-acceleration-hype">
+          <div class="meta">
+            <span>4 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1x73h24/flying_cars_are_real_tesla_roadster/" title="https://reddit.com/r/singularity/comments/1x73h24/flying_cars_are_real_tesla_roadster/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x73kgl/we_got_flying_cars_folks_the_new_tesla_roadster/" title="https://reddit.com/r/singularity/comments/1x73kgl/we_got_flying_cars_folks_the_new_tesla_roadster/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x74rkf/can_you_feel_the_g_force/" title="https://reddit.com/r/singularity/comments/1x74rkf/can_you_feel_the_g_force/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Tesla Roadster and acceleration hype</h3>
+          <p>Multiple high-engagement singularity posts treated the new Tesla Roadster—sub‑1s 0–60 claims and “flying car” framing—as emblematic of a broader burst of futuristic product news. The thread was more cultural spectacle than AI technical debate, but it captured how fast non-AI headlines still dominate general futurism subs.</p>
+        </div><div class="card" id="ai-auditing-research-and-mathematics">
+          <div class="meta">
+            <span>3 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1x6qczp/gpt61_sol_examined_nearly_800_mathematics_papers/" title="https://reddit.com/r/singularity/comments/1x6qczp/gpt61_sol_examined_nearly_800_mathematics_papers/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6nk56/for_a_year_or_two_people_delude_themselves_that/" title="https://reddit.com/r/singularity/comments/1x6nk56/for_a_year_or_two_people_delude_themselves_that/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6nhyp/terence_tao_talks_to_numberphile_about_ai/" title="https://reddit.com/r/singularity/comments/1x6nhyp/terence_tao_talks_to_numberphile_about_ai/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>AI auditing research and mathematics</h3>
+          <p>GPT-6.1 Sol’s pass over hundreds of mathematics papers—major errors in a small fraction, with a narrative that error rates fell as authors used AI—sparked debate about AI as a peer to human mathematicians. Scott Aaronson’s quoted line that math can no longer be treated as the last refuge from automation amplified the same theme.</p>
+        </div><div class="card" id="enterprise-agents-code-security-and-containment">
+          <div class="meta">
+            <span>7 posts</span>
+            <a class="src" href="https://reddit.com/r/artificial/comments/1x6q0v3/anthropics_mythos_found_so_many_software_flaws/" title="https://reddit.com/r/artificial/comments/1x6q0v3/anthropics_mythos_found_so_many_software_flaws/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/artificial</span></a> <a class="src" href="https://reddit.com/r/artificial/comments/1x6oefu/unsupervised_ai_agent_reportedly_deletes_tv_shows/" title="https://reddit.com/r/artificial/comments/1x6oefu/unsupervised_ai_agent_reportedly_deletes_tv_shows/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/artificial</span></a> <a class="src" href="https://reddit.com/r/claude/comments/1x70u6f/researchers_discovered_a_chinese_swarm_this_is/" title="https://reddit.com/r/claude/comments/1x70u6f/researchers_discovered_a_chinese_swarm_this_is/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/claude</span></a>
+          </div>
+          <h3>Enterprise agents, code security, and containment</h3>
+          <p>Anthropic’s Mythos reportedly surfacing enough flaws that a major bank scaled contractor remediation became a touchpoint for AI-driven security review at scale. Parallel stories—unsupervised agents wiping production assets, Mythos access anecdotes, OpenAI’s delayed shutdown of a rogue sandbox agent, and a reported Chinese “rogue fleet”—fed anxiety about permissions, monitoring, and kill switches.</p>
+        </div><div class="card" id="iclr-conference-slop-and-phd-morale">
+          <div class="meta">
+            <span>6 posts</span>
+            <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x5dc8f/weird_pattern_in_the_iclr_papers_i_was_assigned/" title="https://reddit.com/r/MachineLearning/comments/1x5dc8f/weird_pattern_in_the_iclr_papers_i_was_assigned/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x5fv1a/phd_students_how_ya_feeling_d/" title="https://reddit.com/r/MachineLearning/comments/1x5fv1a/phd_students_how_ya_feeling_d/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x3ve39/hows_iclr_reviewing_going_for_you_any/" title="https://reddit.com/r/MachineLearning/comments/1x3ve39/hows_iclr_reviewing_going_for_you_any/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a>
+          </div>
+          <h3>ICLR, conference slop, and PhD morale</h3>
+          <p>Reviewers and students described a wave of low-quality, AI-shaped submissions with repetitive templates, raising questions about detection and fairness in peer review. PhD and early-career posts asked whether to compete on publication volume with model assistance or fall behind—and whether industry still values non-LLM-hype research.</p>
+        </div><div class="card" id="local-inference-open-weights-and-ai-economics">
+          <div class="meta">
+            <span>10 posts</span>
+            <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1x6s7el/flux3_image_klein_is_now_out/" title="https://reddit.com/r/LocalLLaMA/comments/1x6s7el/flux3_image_klein_is_now_out/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6dawj/banks_are_now_trying_to_offload_the_ai_data/" title="https://reddit.com/r/singularity/comments/1x6dawj/banks_are_now_trying_to_offload_the_ai_data/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1x6oh29/im_really_shocked_that_all_of_this_progress_is/" title="https://reddit.com/r/singularity/comments/1x6oh29/im_really_shocked_that_all_of_this_progress_is/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Local inference, open weights, and AI economics</h3>
+          <p>LocalLLaMA stayed busy with Flux.3 Image Klein, Qwen/Nemotron quants, cheap ARM mini-PC runs, and debate over RTX Spark laptop value versus datacenter-scale builds. Macro threads—banks trying to offload AI datacenter debt, Accenture capping Claude spend, and investor caution on Anthropic IPO growth—paired with “LLM wrapper” surprise at how far scaling language models has gone.</p>
+        </div></div>
+
+  <h2 id="notable-papers">Notable papers <span style="font-size:.7em;font-weight:600">(this week)</span></h2>
+  <div class="card-grid"><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06301v1">HarnessOpt-Bench: Evaluating LLMs at Harness Optimization</a></h3>
+          <p>Introduces a benchmark for how well LLMs can iteratively improve the surrounding agent harness—prompts, tools, control flow, and memory—rather than only raw model weights. Treats harness tuning as a first-class capability for agentic deployments.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06346v1">TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories</a></h3>
+          <p>Targets debugging in long agent runs by locating the earliest trajectory step that causally leads to final failure, instead of only scoring outcomes. Aims to make cascading agent errors easier to attribute and fix.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06370v1">The Bitter Lesson of Tool Calling</a></h3>
+          <p>Empirically compares programmatic tool use (code that chains and parallelizes calls) against classic JSON tool-calling on a standard benchmark across model generations. Connects to the community debate on why CodeAct-style patterns have not dominated production stacks.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06305v1">Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations</a></h3>
+          <p>Argues that chunk-and-embed top-k retrieval breaks on table-heavy financial and regulatory documents, and proposes measurable agentic document operations as an alternative. Relevant to practitioners building RAG over structured long reports.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06296v1">On-Policy Self-Distillation without Any Supervision</a></h3>
+          <p>Shows post-training self-distillation can run on-policy without external labels, environment rewards, or a larger teacher model. Pushes toward genuinely self-contained refinement loops for LLMs.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06353v1">Resourced Authority: A Mechanism-Design Model for Participatory Governance of Deployed AI Agents</a></h3>
+          <p>Formalizes ongoing governance of deployed agents through resource budgets so authorization is enforced by compute limits rather than policy text alone. Aligns with production threads on fail-closed agent authorization and governance.</p>
+        </div></div>
+
+  <h2 id="top-questions">Top questions</h2>
+  <ul><li><a href="https://reddit.com/r/MachineLearning/comments/1x4awlk/what_is_the_strongest_mechanistic_argument_that/">What is the strongest mechanistic argument that next-token prediction plus reinforcement learning can produce open-ended general intelligence?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x5fv1a/phd_students_how_ya_feeling_d/">PhD students, how are you feeling about research when you can vibe a third paper with Claude versus developing slowly and falling behind?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x3ve39/hows_iclr_reviewing_going_for_you_any/">How are ICLR reviewers identifying AI slop and handling submissions when automated research makes bad papers harder to spot?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x50ptr/iclr_reviewers_are_you_using_ai_to_review_papers/">ICLR reviewers, are you using AI tools to assist with reviews or still doing everything manually?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x6dytx/university_gpu_cluster_is_holding_my_research/">Can a PhD student ethically use an internship company’s GPUs for personal academic research when the university cluster queue takes days?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x5080s/any_advice_for_what_industry_is_looking_for_in_ml/">What is industry actually looking for in ML PhDs when internships reject candidates with NeurIPS main-track papers in non-hype areas?</a></li><li><a href="https://reddit.com/r/singularity/comments/1x6kmp4/wheres_the_limit_with_ai_agents_on_complex/">Where is the practical limit for AI agents on complex engineering work once context and rigor are sufficient?</a></li><li><a href="https://reddit.com/r/LangChain/comments/1x6isi9/do_we_really_need_wrappers_like/">Do production RAG and agent systems really need wrappers like LangChain and LlamaIndex, or is native code better at scale?</a></li><li><a href="https://reddit.com/r/LangChain/comments/1x4tjfs/who_should_actually_control_an_ai_agents/">Who should control an AI agent’s permissions—the developer, the user, or the runtime when legitimate tools combine in unintended ways?</a></li><li><a href="https://reddit.com/r/singularity/comments/1x6n6i9/why_so_little_talk_about_vera_rubin_nvl72/">Why is there so little discussion of Vera Rubin NVL72 racks as a potential step change for training and inference at scale?</a></li></ul>
+  <footer>
+    Sourced from public Reddit AI communities, Google News, and arXiv
+    (cs.AI / cs.LG / cs.CL), summarized by AI. Links go to the original posts,
+    articles, and papers.
+  </footer>
+  </div>
+  
+  <aside class="timeline-rail" aria-label="Published digests">
+    <div class="timeline-card">
+      <div class="timeline-title">Timeline</div>
+      <ol class="timeline"><li class="tl-item current"><span class="tl-dot" aria-hidden="true"></span><span class="tl-link"><span class="tl-date">Oct 16</span><span class="tl-year">2026</span></span></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-09/"><span class="tl-date">Oct 09</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-02/"><span class="tl-date">Oct 02</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-25/"><span class="tl-date">Sep 25</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-18/"><span class="tl-date">Sep 18</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-11/"><span class="tl-date">Sep 11</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-04/"><span class="tl-date">Sep 04</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-28/"><span class="tl-date">Aug 28</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-21/"><span class="tl-date">Aug 21</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-14/"><span class="tl-date">Aug 14</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-08/"><span class="tl-date">Aug 08</span><span class="tl-year">2026</span></a></li></ol>
+    </div>
+  </aside>
+
+  </div>
+  </div>
+</body>
+</html>
