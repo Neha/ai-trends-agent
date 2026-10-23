@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI — Trending This Week · October 23, 2026</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1523;
+    --paper: #fff8ef;
+    --card: #ffffff;
+    --coral: #ff5a5f;
+    --mango: #ffb703;
+    --lime: #8fd94f;
+    --teal: #00c2a8;
+    --sky: #4cc9f0;
+    --link: #0b6e4f;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Nunito", "Trebuchet MS", sans-serif;
+    line-height: 1.55;
+    background-color: #ffe8a3;
+    background-image:
+      radial-gradient(circle at 12% 18%, #ff8fab55 0 18%, transparent 19%),
+      radial-gradient(circle at 88% 12%, #4cc9f055 0 16%, transparent 17%),
+      radial-gradient(circle at 80% 78%, #8fd94f55 0 20%, transparent 21%),
+      radial-gradient(circle at 18% 82%, #ffb70366 0 14%, transparent 15%),
+      repeating-linear-gradient(
+        -18deg,
+        #ffe8a3 0 14px,
+        #ffd56b 14px 28px
+      );
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+  }
+  .page-header { margin-bottom: .25rem; }
+  .body-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main { min-width: 0; }
+  .timeline-rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    margin-top: 2.5rem; /* match first h2 so rail lines up with content body */
+  }
+  .timeline-card {
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--coral);
+    padding: .85rem .75rem 1rem;
+  }
+  .timeline-title {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .85rem;
+    text-align: center;
+    padding: .2rem .4rem;
+    background: var(--mango);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.85rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: .35rem;
+    bottom: .35rem;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-weight: 700;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item:hover { transform: none; box-shadow: none; }
+  .tl-dot {
+    position: absolute;
+    left: -0.72rem;
+    top: .45rem;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    z-index: 1;
+  }
+  .tl-item.current .tl-dot {
+    background: var(--coral);
+    box-shadow: 0 0 0 3px #ff5a5f44;
+  }
+  .tl-link {
+    display: flex;
+    flex-direction: column;
+    gap: .05rem;
+    padding: .35rem .5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  a.tl-link:hover {
+    background: var(--sky);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tl-item.current .tl-link {
+    background: var(--ink);
+    color: var(--mango);
+    border-color: var(--ink);
+  }
+  .tl-date { font-size: .88rem; }
+  .tl-year { font-size: .7rem; opacity: .75; font-weight: 600; }
+  .tl-item.current .tl-year { color: #ffe8a3; opacity: 1; }
+  h1 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 .85rem;
+    display: inline-block;
+    padding: .2rem .55rem .35rem;
+    background: var(--ink);
+    color: var(--mango);
+    transform: rotate(-1.2deg);
+    box-shadow: 6px 6px 0 var(--coral);
+  }
+  .section-nav { margin-bottom: 1.25rem; }
+  .section-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .section-pill {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .4rem .8rem; border-radius: 12px; text-decoration: none;
+    font-size: .85rem; font-weight: 700; border: 2.5px solid var(--ink);
+    color: var(--ink); background: var(--teal);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .section-pill:nth-child(2) { background: var(--mango); }
+  .section-pill:nth-child(3) { background: var(--sky); }
+  .section-pill:nth-child(4) { background: var(--lime); }
+  .section-pill:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--ink);
+    color: var(--ink);
+  }
+  .section-pill .count {
+    font-size: .72rem; font-weight: 800; padding: .1rem .4rem;
+    border-radius: 8px; background: var(--ink); color: var(--mango);
+  }
+  .week-brief {
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.2rem 1.25rem;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--teal);
+  }
+  .week-brief h2 {
+    margin-top: 0;
+    background: var(--coral);
+    color: #fff;
+  }
+  .week-brief .overview {
+    margin: .85rem 0 .75rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .week-brief .vs-last {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem .55rem;
+    align-items: center;
+    font-size: .88rem;
+    font-weight: 700;
+  }
+  .week-brief .vs-last span {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .date-nav {
+    margin-bottom: 1.25rem; padding: .4rem .7rem; border: 2.5px solid var(--ink);
+    border-radius: 12px; background: var(--paper);
+    box-shadow: 3px 3px 0 var(--coral);
+  }
+  .date-nav-row { display: flex; align-items: center; justify-content: space-between;
+                  gap: .5rem; margin-bottom: .3rem; }
+  .date-nav-row.alone { margin-bottom: 0; }
+  .date-current {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; text-align: center; flex: 1; font-size: .95rem;
+    line-height: 1.2;
+  }
+  .nav-btn {
+    font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--ink);
+    white-space: nowrap; min-width: 5rem; padding: .15rem .35rem;
+    border-radius: 8px; border: 2px solid transparent; line-height: 1.2;
+  }
+  .nav-btn:hover:not(.disabled) {
+    background: var(--lime); border-color: var(--ink);
+  }
+  .date-nav-row .nav-btn:last-child { text-align: right; }
+  .nav-btn.disabled { color: #1a152366; pointer-events: none; }
+  h2 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; font-size: 1.65rem; margin-top: 2.5rem;
+    scroll-margin-top: 1rem; display: inline-block;
+    padding: .15rem .55rem; background: var(--mango);
+    border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-0.6deg);
+  }
+  #top-questions { background: var(--lime); }
+  #notable-papers { background: var(--sky); }
+  .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+               column-gap: .85rem; row-gap: 4rem; margin: .85rem 0 1.25rem; }
+  @media (max-width: 1100px) {
+    .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .body-row { grid-template-columns: 1fr; }
+    .timeline-rail {
+      position: static;
+      order: -1;
+      margin-top: 0;
+      margin-bottom: .5rem;
+    }
+    .timeline {
+      display: flex; flex-wrap: wrap; gap: .5rem; padding: 0;
+    }
+    .timeline::before { display: none; }
+    .tl-item { margin: 0; }
+    .tl-dot { display: none; }
+    .tl-link { flex-direction: row; align-items: baseline; gap: .35rem; }
+  }
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    h1 { transform: none; }
+  }
+  .card {
+    border: 3px solid var(--ink); border-radius: 16px; padding: 1rem 1.15rem;
+    margin: 0; scroll-margin-top: 1rem; height: 100%;
+    display: flex; flex-direction: column; background: var(--card);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .card:nth-child(4n+1) { background: #fff7fb; }
+  .card:nth-child(4n+2) { background: #f3fffa; }
+  .card:nth-child(4n+3) { background: #fffbeb; }
+  .card:nth-child(4n+4) { background: #f2fbff; }
+  .card:hover {
+    transform: translate(-3px, -3px) rotate(-0.5deg);
+    box-shadow: 8px 8px 0 var(--coral);
+  }
+  .card:nth-child(even):hover {
+    transform: translate(-3px, -3px) rotate(0.5deg);
+    box-shadow: 8px 8px 0 var(--teal);
+  }
+  .card:target { outline: 3px solid var(--mango); outline-offset: 3px; }
+  .card h3 {
+    margin: 0 0 .45rem;
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 600; font-size: 1.05rem; line-height: 1.25;
+  }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--link); text-decoration: underline; }
+  .card p { margin: 0; flex: 1; font-size: .92rem; }
+  .card .meta { margin: 0 0 .65rem; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .55rem;
+          font-size: .85rem; color: #5a5160; font-weight: 600; }
+  .src {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .15rem .55rem .15rem .3rem; border-radius: 10px;
+    background: #fff; color: inherit; text-decoration: none;
+    font-size: .78rem; border: 2px solid var(--ink); font-weight: 700;
+  }
+  .src:hover { background: var(--mango); color: var(--ink); }
+  .src-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
+  .main > ul { padding-left: 0; list-style: none; }
+  .main > ul > li {
+    margin: .65rem 0; padding: .75rem 1rem; background: var(--paper);
+    border: 2.5px solid var(--ink); border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--teal); font-weight: 600;
+  }
+  .main > ul > li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }
+  a { color: var(--link); }
+  footer {
+    margin-top: 3rem; padding: 1rem 1.1rem; border: 3px solid var(--ink);
+    border-radius: 16px; background: var(--ink); color: #ffe8a3;
+    font-size: .9rem; font-weight: 600; box-shadow: 5px 5px 0 var(--mango);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+  <header class="page-header">
+  <h1>AI — Trending This Week</h1>
+  
+  <nav class="section-nav" aria-label="On this page">
+    <div class="section-pills"><a class="section-pill" href="#week-brief">Brief</a><a class="section-pill" href="#trending-topics">Topics<span class="count">7</span></a><a class="section-pill" href="#notable-papers">Papers<span class="count">6</span></a><a class="section-pill" href="#top-questions">Questions<span class="count">10</span></a></div>
+  </nav>
+
+  
+  <nav class="date-nav" aria-label="Digest date">
+    <div class="date-nav-row alone">
+      <a class="nav-btn" href="../2026-10-16/">← October 16, 2026</a>
+      <div class="date-current">October 23, 2026</div>
+      <span class="nav-btn disabled" aria-disabled="true">Newer →</span>
+    </div>
+  </nav>
+
+  </header>
+  <div class="body-row">
+  <div class="main">
+  
+  <section class="week-brief" id="week-brief" aria-label="Week in brief">
+    <h2>Week in brief</h2>
+    <p class="overview">This week centered on proactive agents—especially Anthropic’s Claude Duet—and on AI compressing scientific timelines, from OpenAI’s GPT-Rosalind brain-mapping swarm to frontier models surfacing critical PHP flaws and banks scrambling to patch legacy stacks. ML communities were deep in ICLR reviewing, debating floods of weak submissions, opaque AI-like prose in papers, and a Harvard-linked study suggesting Opus can match or beat human peer reviewers. Parallel threads covered subscription usage limits and resets, LangGraph and production agent patterns, and recurring questions about whether LLMs enable genuinely new capabilities or mainly accelerate existing work.</p>
+    
+    <p class="vs-last">
+      Same as last publish (October 16, 2026):
+      <span>0 of 7 topics</span>
+      <span>0 of 10 questions</span>
+      <span>6 of 6 papers</span>
+    </p>
+  </section>
+
+  <h2 id="trending-topics">Trending topics</h2>
+  <div class="card-grid"><div class="card" id="claude-duet-and-proactive-agents">
+          <div class="meta">
+            <span>12 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1xbz98o/anthropic_unveils_claude_duet_a_proactive_ai/" title="https://reddit.com/r/singularity/comments/1xbz98o/anthropic_unveils_claude_duet_a_proactive_ai/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/ClaudeAI/comments/1xd41oa/this_is_addictive/" title="https://reddit.com/r/ClaudeAI/comments/1xd41oa/this_is_addictive/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/ClaudeAI</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xczh14/introducing_npctalk_make_the_npcs_of_any_game/" title="https://reddit.com/r/singularity/comments/1xczh14/introducing_npctalk_make_the_npcs_of_any_game/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Claude Duet and proactive agents</h3>
+          <p>Anthropic’s Claude Duet research preview drew heavy attention as a proactive agent powered by Opus 5.5 that monitors apps, runs tasks on its own cloud environment, and alerts users when needed, with thousands of integrations and persistent context. Discussion extended to orchestrating local models with Opus, realtime NPC dialogue stacks, and skepticism about lightweight consumer agent wrappers versus serious automation.</p>
+        </div><div class="card" id="ai-accelerating-science-and-peer-review">
+          <div class="meta">
+            <span>8 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1xbx2x9/openais_thousands_of_gptrosalind_agents_analyzed/" title="https://reddit.com/r/singularity/comments/1xbx2x9/openais_thousands_of_gptrosalind_agents_analyzed/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/OpenAI/comments/1xd4h5f/by_every_measure_opus_48_beats_human_experts_as/" title="https://reddit.com/r/OpenAI/comments/1xd4h5f/by_every_measure_opus_48_beats_human_experts_as/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/OpenAI</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1xa3svs/ai_generates_research_ideas_faster_than_i_can/" title="https://reddit.com/r/MachineLearning/comments/1xa3svs/ai_generates_research_ideas_faster_than_i_can/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a>
+          </div>
+          <h3>AI accelerating science and peer review</h3>
+          <p>OpenAI’s GPT-Rosalind agents analyzing millions of mouse brain cells in minutes—with human experts preferring their output much of the time—joined threads on Opus outperforming human reviewers on a large set of Harvard social science papers. Researchers also argued that brainstorming and smoke implementations are now far faster than validating ideas, shifting the bottleneck from ideation to empirical testing.</p>
+        </div><div class="card" id="ai-discovered-vulnerabilities-and-bank-legacy-fallout">
+          <div class="meta">
+            <span>7 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1xc74ng/php_vulnerabilities_cve2026109618_and/" title="https://reddit.com/r/singularity/comments/1xc74ng/php_vulnerabilities_cve2026109618_and/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xc5i4e/bank_of_america_hired_1000_contractors_to_patch/" title="https://reddit.com/r/singularity/comments/1xc5i4e/bank_of_america_hired_1000_contractors_to_patch/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xcxezj/cybersecurity_people_are_losing_their_minds_today/" title="https://reddit.com/r/singularity/comments/1xcxezj/cybersecurity_people_are_losing_their_minds_today/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>AI-discovered vulnerabilities and bank legacy fallout</h3>
+          <p>Frontier models independently finding serious PHP RCE issues—aligned with OpenAI’s Patch the Planet coordination narrative—sparked talk of AI-supercharged hacking and acute anxiety in security circles. Reddit tied this to Bank of America reportedly hiring large contractor teams after Anthropic-related discovery work and to banks restricting unprompted AI agents accessing customer accounts.</p>
+        </div><div class="card" id="iclr-review-season-and-paper-quality-backlash">
+          <div class="meta">
+            <span>9 posts</span>
+            <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x819z7/how_many_of_you_have_seen_this_honest_iclr/" title="https://reddit.com/r/MachineLearning/comments/1x819z7/how_many_of_you_have_seen_this_honest_iclr/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x9fyhd/conference_papers_are_cooked_d/" title="https://reddit.com/r/MachineLearning/comments/1x9fyhd/conference_papers_are_cooked_d/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x8oksb/what_is_wrong_with_ai_writing_iclr_edition_d/" title="https://reddit.com/r/MachineLearning/comments/1x8oksb/what_is_wrong_with_ai_writing_iclr_edition_d/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a>
+          </div>
+          <h3>ICLR review season and paper-quality backlash</h3>
+          <p>Reviewers reported unusually weak submission pools at ICLR and related venues, with pleas not to submit unfinished work and frustration with impenetrable, AI-flavored results prose. A widely shared honest ICLR submission meme highlighted disclosures others might quietly omit, fueling debate on LLM-assisted reviewing and how to flag bad writing without overclaiming model use.</p>
+        </div><div class="card" id="practical-wins-coding-games-and-inference-tricks">
+          <div class="meta">
+            <span>6 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1xbwun6/oblivion_remastered_mod_built_using_claude_ai/" title="https://reddit.com/r/singularity/comments/1xbwun6/oblivion_remastered_mod_built_using_claude_ai/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x9c5ty/beating_warcraft_iiis_insane_ai_with_selfplay/" title="https://reddit.com/r/MachineLearning/comments/1x9c5ty/beating_warcraft_iiis_insane_ai_with_selfplay/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1x7qgr0/research_2788_tokenss_on_a_single_rtx_5090_with_a/" title="https://reddit.com/r/MachineLearning/comments/1x7qgr0/research_2788_tokenss_on_a_single_rtx_5090_with_a/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a>
+          </div>
+          <h3>Practical wins: coding, games, and inference tricks</h3>
+          <p>High-engagement show-and-tell included Claude-assisted game mods boosting Oblivion Remastered FPS, desktop self-play RL beating Warcraft III’s built-in AI, and research posts on diffusion LLM throughput and runtime binary speedups. The tone mixed excitement about instant iteration with caution that verification and deployment still lag generation.</p>
+        </div><div class="card" id="langgraph-rag-and-production-agent-engineering">
+          <div class="meta">
+            <span>18 posts</span>
+            <a class="src" href="https://reddit.com/r/LangChain/comments/1x8cwos/langgraph_in_small_pieces/" title="https://reddit.com/r/LangChain/comments/1x8cwos/langgraph_in_small_pieces/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LangChain</span></a> <a class="src" href="https://reddit.com/r/LangChain/comments/1xbx650/langgraph_state_machines_that_can_safely_retry/" title="https://reddit.com/r/LangChain/comments/1xbx650/langgraph_state_machines_that_can_safely_retry/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LangChain</span></a> <a class="src" href="https://reddit.com/r/LangChain/comments/1xal03s/connecting_agent_memory_to_knowledge_and/" title="https://reddit.com/r/LangChain/comments/1xal03s/connecting_agent_memory_to_knowledge_and/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LangChain</span></a>
+          </div>
+          <h3>LangGraph, RAG, and production agent engineering</h3>
+          <p>LangChain communities focused on moving LangGraph demos to production: idempotent retries, human-in-the-loop interrupts, connecting agent memory to GraphRAG, newer rerankers and embed models, and sandbox placement for research agents. Several builders shared books, workshops, and open tools for debugging agent runs and incremental doc re-embedding.</p>
+        </div><div class="card" id="subscriptions-limits-and-trust-in-ai-products">
+          <div class="meta">
+            <span>22 posts</span>
+            <a class="src" href="https://reddit.com/r/ClaudeAI/comments/1xd5ruf/anthropic_appears_to_sneak_in_a_legal_loophole_in/" title="https://reddit.com/r/ClaudeAI/comments/1xd5ruf/anthropic_appears_to_sneak_in_a_legal_loophole_in/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/ClaudeAI</span></a> <a class="src" href="https://reddit.com/r/ChatGPT/comments/1xd60o8/chatgptcodex_not_practically_usable_lately/" title="https://reddit.com/r/ChatGPT/comments/1xd60o8/chatgptcodex_not_practically_usable_lately/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/ChatGPT</span></a> <a class="src" href="https://reddit.com/r/womenin_AI/comments/1x9ww5h/security_for_vibe_coded_applications/" title="https://reddit.com/r/womenin_AI/comments/1x9ww5h/security_for_vibe_coded_applications/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/womenin_AI</span></a>
+          </div>
+          <h3>Subscriptions, limits, and trust in AI products</h3>
+          <p>Claude and ChatGPT subreddits were dominated by usage resets expiring early, Codex and Sol burning quotas quickly, UI regressions, and controversy that Claude Code may treat Allow edit as trainable feedback under commercial terms even when improvement toggles are off. Broader trust threads covered API key leaks on vibe-coded apps and whether proactive agents should touch sensitive accounts.</p>
+        </div></div>
+
+  <h2 id="notable-papers">Notable papers <span style="font-size:.7em;font-weight:600">(this week)</span></h2>
+  <div class="card-grid"><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06301v1">HarnessOpt-Bench: Evaluating LLMs at Harness Optimization</a></h3>
+          <p>Introduces a benchmark for how well LLMs can iteratively improve the surrounding agent harness—prompts, tools, control flow, and memory—rather than only raw model weights. Treats harness tuning as a first-class capability for agentic deployments.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06346v1">TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories</a></h3>
+          <p>Targets debugging in long agent runs by locating the earliest trajectory step that causally leads to final failure, instead of only scoring outcomes. Aims to make cascading agent errors easier to attribute and fix.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06370v1">The Bitter Lesson of Tool Calling</a></h3>
+          <p>Empirically compares programmatic tool use (code that chains and parallelizes calls) against classic JSON tool-calling on a standard benchmark across model generations. Connects to the community debate on why CodeAct-style patterns have not dominated production stacks.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06305v1">Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations</a></h3>
+          <p>Argues that chunk-and-embed top-k retrieval breaks on table-heavy financial and regulatory documents, and proposes measurable agentic document operations as an alternative. Relevant to practitioners building RAG over structured long reports.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06296v1">On-Policy Self-Distillation without Any Supervision</a></h3>
+          <p>Shows post-training self-distillation can run on-policy without external labels, environment rewards, or a larger teacher model. Pushes toward genuinely self-contained refinement loops for LLMs.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06353v1">Resourced Authority: A Mechanism-Design Model for Participatory Governance of Deployed AI Agents</a></h3>
+          <p>Formalizes ongoing governance of deployed agents through resource budgets so authorization is enforced by compute limits rather than policy text alone. Aligns with production threads on fail-closed agent authorization and governance.</p>
+        </div></div>
+
+  <h2 id="top-questions">Top questions</h2>
+  <ul><li><a href="https://reddit.com/r/MachineLearning/comments/1x8oksb/what_is_wrong_with_ai_writing_iclr_edition_d/">How should reviewers call out impenetrable, AI-style scientific writing in papers without overclaiming that the text was model-generated?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x9i1pg/do_iclr_guidelines_allow_to_upload_papers_under/">Does ICLR allow uploading papers under review into LLM chats for prose help, and where is the line on using models as a second reviewer?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1xa3svs/ai_generates_research_ideas_faster_than_i_can/">Has anyone else hit a bottleneck where AI generates research directions and smoke code faster than they can empirically test them?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x9e2fw/anyone_else_get_brain_lag_from_overlycondensed/">What research or product work exists on making model output more readable and less cognitively dense (brain lag from condensed AI-speak)?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1x97yan/have_llms_actually_made_the_impossible_possible/">Have LLMs fundamentally made new things possible, or are most applications still just making existing tasks faster?</a></li><li><a href="https://reddit.com/r/LangChain/comments/1xa6n4g/how_do_you_test_that_an_internal_ai_stops_using/">For document-based internal assistants, how do you verify the bot stopped citing outdated policies after docs change?</a></li><li><a href="https://reddit.com/r/LangChain/comments/1x7yh6f/where_do_you_draw_the_line_between_a_langgraph/">When building LangGraph agents, where should human-in-the-loop steps live—in-graph interrupts versus plain Python loops outside the graph?</a></li><li><a href="https://reddit.com/r/LangChain/comments/1xakytw/deep_agents_sandboxastool_vs_fullagentinsandbox/">For Deep Agents-style setups, how are teams choosing sandbox-as-tool versus running the full agent tree inside the sandbox?</a></li><li><a href="https://reddit.com/r/singularity/comments/1xby0ar/ai_is_great_with_text_and_images_but_bad_at_audio/">What gaps beyond text, images, and code—especially audio, video, and temporal tasks—still stand between today’s systems and AGI?</a></li><li><a href="https://reddit.com/r/womenin_AI/comments/1x9ww5h/security_for_vibe_coded_applications/">How are people securing vibe-coded apps after API keys were abused and bills spiked?</a></li></ul>
+  <footer>
+    Sourced from public Reddit AI communities, Google News, and arXiv
+    (cs.AI / cs.LG / cs.CL), summarized by AI. Links go to the original posts,
+    articles, and papers.
+  </footer>
+  </div>
+  
+  <aside class="timeline-rail" aria-label="Published digests">
+    <div class="timeline-card">
+      <div class="timeline-title">Timeline</div>
+      <ol class="timeline"><li class="tl-item current"><span class="tl-dot" aria-hidden="true"></span><span class="tl-link"><span class="tl-date">Oct 23</span><span class="tl-year">2026</span></span></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-16/"><span class="tl-date">Oct 16</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-09/"><span class="tl-date">Oct 09</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-02/"><span class="tl-date">Oct 02</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-25/"><span class="tl-date">Sep 25</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-18/"><span class="tl-date">Sep 18</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-11/"><span class="tl-date">Sep 11</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-04/"><span class="tl-date">Sep 04</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-28/"><span class="tl-date">Aug 28</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-21/"><span class="tl-date">Aug 21</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-14/"><span class="tl-date">Aug 14</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-08/"><span class="tl-date">Aug 08</span><span class="tl-year">2026</span></a></li></ol>
+    </div>
+  </aside>
+
+  </div>
+  </div>
+</body>
+</html>
