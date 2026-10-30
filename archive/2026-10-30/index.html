@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI — Trending This Week · October 30, 2026</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1523;
+    --paper: #fff8ef;
+    --card: #ffffff;
+    --coral: #ff5a5f;
+    --mango: #ffb703;
+    --lime: #8fd94f;
+    --teal: #00c2a8;
+    --sky: #4cc9f0;
+    --link: #0b6e4f;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Nunito", "Trebuchet MS", sans-serif;
+    line-height: 1.55;
+    background-color: #ffe8a3;
+    background-image:
+      radial-gradient(circle at 12% 18%, #ff8fab55 0 18%, transparent 19%),
+      radial-gradient(circle at 88% 12%, #4cc9f055 0 16%, transparent 17%),
+      radial-gradient(circle at 80% 78%, #8fd94f55 0 20%, transparent 21%),
+      radial-gradient(circle at 18% 82%, #ffb70366 0 14%, transparent 15%),
+      repeating-linear-gradient(
+        -18deg,
+        #ffe8a3 0 14px,
+        #ffd56b 14px 28px
+      );
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+  }
+  .page-header { margin-bottom: .25rem; }
+  .body-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .main { min-width: 0; }
+  .timeline-rail {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    margin-top: 2.5rem; /* match first h2 so rail lines up with content body */
+  }
+  .timeline-card {
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 4px 4px 0 var(--coral);
+    padding: .85rem .75rem 1rem;
+  }
+  .timeline-title {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 0 0 .85rem;
+    text-align: center;
+    padding: .2rem .4rem;
+    background: var(--mango);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 0.85rem;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: .35rem;
+    bottom: .35rem;
+    width: 3px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin: 0 0 1rem;
+    padding: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+    font-weight: 700;
+  }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item:hover { transform: none; box-shadow: none; }
+  .tl-dot {
+    position: absolute;
+    left: -0.72rem;
+    top: .45rem;
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 2.5px solid var(--ink);
+    z-index: 1;
+  }
+  .tl-item.current .tl-dot {
+    background: var(--coral);
+    box-shadow: 0 0 0 3px #ff5a5f44;
+  }
+  .tl-link {
+    display: flex;
+    flex-direction: column;
+    gap: .05rem;
+    padding: .35rem .5rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  a.tl-link:hover {
+    background: var(--sky);
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tl-item.current .tl-link {
+    background: var(--ink);
+    color: var(--mango);
+    border-color: var(--ink);
+  }
+  .tl-date { font-size: .88rem; }
+  .tl-year { font-size: .7rem; opacity: .75; font-weight: 600; }
+  .tl-item.current .tl-year { color: #ffe8a3; opacity: 1; }
+  h1 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 .85rem;
+    display: inline-block;
+    padding: .2rem .55rem .35rem;
+    background: var(--ink);
+    color: var(--mango);
+    transform: rotate(-1.2deg);
+    box-shadow: 6px 6px 0 var(--coral);
+  }
+  .section-nav { margin-bottom: 1.25rem; }
+  .section-pills { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .section-pill {
+    display: inline-flex; align-items: center; gap: .35rem;
+    padding: .4rem .8rem; border-radius: 12px; text-decoration: none;
+    font-size: .85rem; font-weight: 700; border: 2.5px solid var(--ink);
+    color: var(--ink); background: var(--teal);
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .section-pill:nth-child(2) { background: var(--mango); }
+  .section-pill:nth-child(3) { background: var(--sky); }
+  .section-pill:nth-child(4) { background: var(--lime); }
+  .section-pill:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--ink);
+    color: var(--ink);
+  }
+  .section-pill .count {
+    font-size: .72rem; font-weight: 800; padding: .1rem .4rem;
+    border-radius: 8px; background: var(--ink); color: var(--mango);
+  }
+  .week-brief {
+    margin: 0 0 1.5rem;
+    padding: 1.1rem 1.2rem 1.25rem;
+    border: 3px solid var(--ink);
+    border-radius: 16px;
+    background: var(--paper);
+    box-shadow: 5px 5px 0 var(--teal);
+  }
+  .week-brief h2 {
+    margin-top: 0;
+    background: var(--coral);
+    color: #fff;
+  }
+  .week-brief .overview {
+    margin: .85rem 0 .75rem;
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .week-brief .vs-last {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem .55rem;
+    align-items: center;
+    font-size: .88rem;
+    font-weight: 700;
+  }
+  .week-brief .vs-last span {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .date-nav {
+    margin-bottom: 1.25rem; padding: .4rem .7rem; border: 2.5px solid var(--ink);
+    border-radius: 12px; background: var(--paper);
+    box-shadow: 3px 3px 0 var(--coral);
+  }
+  .date-nav-row { display: flex; align-items: center; justify-content: space-between;
+                  gap: .5rem; margin-bottom: .3rem; }
+  .date-nav-row.alone { margin-bottom: 0; }
+  .date-current {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; text-align: center; flex: 1; font-size: .95rem;
+    line-height: 1.2;
+  }
+  .nav-btn {
+    font-size: .78rem; font-weight: 700; text-decoration: none; color: var(--ink);
+    white-space: nowrap; min-width: 5rem; padding: .15rem .35rem;
+    border-radius: 8px; border: 2px solid transparent; line-height: 1.2;
+  }
+  .nav-btn:hover:not(.disabled) {
+    background: var(--lime); border-color: var(--ink);
+  }
+  .date-nav-row .nav-btn:last-child { text-align: right; }
+  .nav-btn.disabled { color: #1a152366; pointer-events: none; }
+  h2 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 700; font-size: 1.65rem; margin-top: 2.5rem;
+    scroll-margin-top: 1rem; display: inline-block;
+    padding: .15rem .55rem; background: var(--mango);
+    border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    transform: rotate(-0.6deg);
+  }
+  #top-questions { background: var(--lime); }
+  #notable-papers { background: var(--sky); }
+  .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+               column-gap: .85rem; row-gap: 4rem; margin: .85rem 0 1.25rem; }
+  @media (max-width: 1100px) {
+    .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 860px) {
+    .body-row { grid-template-columns: 1fr; }
+    .timeline-rail {
+      position: static;
+      order: -1;
+      margin-top: 0;
+      margin-bottom: .5rem;
+    }
+    .timeline {
+      display: flex; flex-wrap: wrap; gap: .5rem; padding: 0;
+    }
+    .timeline::before { display: none; }
+    .tl-item { margin: 0; }
+    .tl-dot { display: none; }
+    .tl-link { flex-direction: row; align-items: baseline; gap: .35rem; }
+  }
+  @media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    h1 { transform: none; }
+  }
+  .card {
+    border: 3px solid var(--ink); border-radius: 16px; padding: 1rem 1.15rem;
+    margin: 0; scroll-margin-top: 1rem; height: 100%;
+    display: flex; flex-direction: column; background: var(--card);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .card:nth-child(4n+1) { background: #fff7fb; }
+  .card:nth-child(4n+2) { background: #f3fffa; }
+  .card:nth-child(4n+3) { background: #fffbeb; }
+  .card:nth-child(4n+4) { background: #f2fbff; }
+  .card:hover {
+    transform: translate(-3px, -3px) rotate(-0.5deg);
+    box-shadow: 8px 8px 0 var(--coral);
+  }
+  .card:nth-child(even):hover {
+    transform: translate(-3px, -3px) rotate(0.5deg);
+    box-shadow: 8px 8px 0 var(--teal);
+  }
+  .card:target { outline: 3px solid var(--mango); outline-offset: 3px; }
+  .card h3 {
+    margin: 0 0 .45rem;
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-weight: 600; font-size: 1.05rem; line-height: 1.25;
+  }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--link); text-decoration: underline; }
+  .card p { margin: 0; flex: 1; font-size: .92rem; }
+  .card .meta { margin: 0 0 .65rem; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .55rem;
+          font-size: .85rem; color: #5a5160; font-weight: 600; }
+  .src {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .15rem .55rem .15rem .3rem; border-radius: 10px;
+    background: #fff; color: inherit; text-decoration: none;
+    font-size: .78rem; border: 2px solid var(--ink); font-weight: 700;
+  }
+  .src:hover { background: var(--mango); color: var(--ink); }
+  .src-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
+  .main > ul { padding-left: 0; list-style: none; }
+  .main > ul > li {
+    margin: .65rem 0; padding: .75rem 1rem; background: var(--paper);
+    border: 2.5px solid var(--ink); border-radius: 14px;
+    box-shadow: 3px 3px 0 var(--teal); font-weight: 600;
+  }
+  .main > ul > li:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--coral); }
+  a { color: var(--link); }
+  footer {
+    margin-top: 3rem; padding: 1rem 1.1rem; border: 3px solid var(--ink);
+    border-radius: 16px; background: var(--ink); color: #ffe8a3;
+    font-size: .9rem; font-weight: 600; box-shadow: 5px 5px 0 var(--mango);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+  <header class="page-header">
+  <h1>AI — Trending This Week</h1>
+  
+  <nav class="section-nav" aria-label="On this page">
+    <div class="section-pills"><a class="section-pill" href="#week-brief">Brief</a><a class="section-pill" href="#trending-topics">Topics<span class="count">7</span></a><a class="section-pill" href="#notable-papers">Papers<span class="count">6</span></a><a class="section-pill" href="#top-questions">Questions<span class="count">10</span></a></div>
+  </nav>
+
+  
+  <nav class="date-nav" aria-label="Digest date">
+    <div class="date-nav-row alone">
+      <a class="nav-btn" href="../2026-10-23/">← October 23, 2026</a>
+      <div class="date-current">October 30, 2026</div>
+      <span class="nav-btn disabled" aria-disabled="true">Newer →</span>
+    </div>
+  </nav>
+
+  </header>
+  <div class="body-row">
+  <div class="main">
+  
+  <section class="week-brief" id="week-brief" aria-label="Week in brief">
+    <h2>Week in brief</h2>
+    <p class="overview">This week’s conversation was dominated by a clash between cloud-centric AI leadership and the local/open-weights community: Sam Altman’s critique of local inference as a misallocation of DRAM sparked the largest thread, while Mistral’s trillion-parameter open-weight release gave local runners something new to argue about running. Frontier labs kept pushing agent swarms and research automation—OpenAI’s math workloads, GPT-6 Astra robotics demos, and multi-model audits of economics literature—alongside growing anxiety about peer review, fabricated results, and silent changes to cloud API models. Product threads mixed relief over usage-limit rollbacks with frustration over tier confusion, upsell patterns in ChatGPT, and Reddit’s move toward logged-in-only browsing that threatens agent web search.</p>
+    
+    <p class="vs-last">
+      Same as last publish (October 23, 2026):
+      <span>0 of 7 topics</span>
+      <span>0 of 10 questions</span>
+      <span>6 of 6 papers</span>
+    </p>
+  </section>
+
+  <h2 id="trending-topics">Trending topics</h2>
+  <div class="card-grid"><div class="card" id="local-inference-vs-centralized-compute">
+          <div class="meta">
+            <span>12 posts</span>
+            <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xizbq1/sam_altman_local_inference_is_a_terrible/" title="https://reddit.com/r/LocalLLaMA/comments/1xizbq1/sam_altman_local_inference_is_a_terrible/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xils4t/i_think_local_ai_cost_me_a_job/" title="https://reddit.com/r/LocalLLaMA/comments/1xils4t/i_think_local_ai_cost_me_a_job/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xin9cx/ai_supercomputer_up_for_sale_on_ebay/" title="https://reddit.com/r/singularity/comments/1xin9cx/ai_supercomputer_up_for_sale_on_ebay/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Local inference vs centralized compute</h3>
+          <p>Sam Altman argued that spreading scarce DRAM across millions of home machines is a poor global allocation compared to datacenter inference, triggering fierce pushback from r/LocalLLaMA about privacy, ownership, and gatekeeping. Related threads covered job interviews turning sour when candidates admit they run local models, eBay listings for decommissioned GPU clusters, and whether datacenter financing stress might eventually ease hardware prices for hobbyists.</p>
+        </div><div class="card" id="mistral-large-4-le-chonk-open-weights">
+          <div class="meta">
+            <span>5 posts</span>
+            <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xil3qy/mistral_large_4_le_chonk_is_now_open_weight/" title="https://reddit.com/r/LocalLLaMA/comments/1xil3qy/mistral_large_4_le_chonk_is_now_open_weight/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xil58b/mistralaimistrallarge41ta52b_hugging_face/" title="https://reddit.com/r/LocalLLaMA/comments/1xil58b/mistralaimistrallarge41ta52b_hugging_face/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xilupe/mistral_releases_open_weights_for_its_1/" title="https://reddit.com/r/singularity/comments/1xilupe/mistral_releases_open_weights_for_its_1/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Mistral Large 4 (Le Chonk) open weights</h3>
+          <p>Mistral released open weights for a 1T-parameter MoE multimodal model trained on in-house Grace Blackwell clusters, marketed as their largest release yet with llama.cpp integration called out for the local community. Discussion split between excitement over capability and practicality of running or quantizing a model of that scale on consumer hardware.</p>
+        </div><div class="card" id="agent-swarms-and-automated-research">
+          <div class="meta">
+            <span>8 posts</span>
+            <a class="src" href="https://reddit.com/r/singularity/comments/1xiwplq/sam_altman_reveals_openai_barely_understood_how/" title="https://reddit.com/r/singularity/comments/1xiwplq/sam_altman_reveals_openai_barely_understood_how/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1ximxhx/10_millions_of_compute_on_navierstokes_100/" title="https://reddit.com/r/singularity/comments/1ximxhx/10_millions_of_compute_on_navierstokes_100/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xj2r4a/claude_opus_55_and_gpt6_astra_independently_audit/" title="https://reddit.com/r/singularity/comments/1xj2r4a/claude_opus_55_and_gpt6_astra_independently_audit/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Agent swarms and automated research</h3>
+          <p>Sam Altman said OpenAI still lacked solid understanding of scaling agent swarms even while tackling hard math, with expectations of major coordination progress within months and possible automation of AI research itself. Community posts highlighted large compute spend on physics simulations, researchers feeding career-hard problems to models, and Claude Opus 5.5 plus GPT-6 Astra flagging thousands of issues in economics papers.</p>
+        </div><div class="card" id="peer-review-paper-integrity-and-llm-reviewers">
+          <div class="meta">
+            <span>6 posts</span>
+            <a class="src" href="https://reddit.com/r/MachineLearning/comments/1xh2wzt/the_paper_reviewing_process_is_now_in_critical/" title="https://reddit.com/r/MachineLearning/comments/1xh2wzt/the_paper_reviewing_process_is_now_in_critical/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a> <a class="src" href="https://reddit.com/r/artificial/comments/1xi1fg7/llms_are_significantly_better_at_finding_mistakes/" title="https://reddit.com/r/artificial/comments/1xi1fg7/llms_are_significantly_better_at_finding_mistakes/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/artificial</span></a> <a class="src" href="https://reddit.com/r/MachineLearning/comments/1xj8tvc/freind_of_mine_published_a_paper_with_fabricated/" title="https://reddit.com/r/MachineLearning/comments/1xj8tvc/freind_of_mine_published_a_paper_with_fabricated/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/MachineLearning</span></a>
+          </div>
+          <h3>Peer review, paper integrity, and LLM reviewers</h3>
+          <p>ML reviewers reported widespread AI-generated reviews at major venues, while other threads claimed LLMs catch errors in papers better than trained human reviewers and described friends fabricating metrics that still got into top conferences. The combination fueled debate on whether the review process is in critical condition and whether AI should systematically re-audit published literature.</p>
+        </div><div class="card" id="frontier-model-leaks-distillation-and-benchmarks">
+          <div class="meta">
+            <span>9 posts</span>
+            <a class="src" href="https://reddit.com/r/OpenAI/comments/1xizikk/sources_identify_openais_reported_bel_as_gpt62/" title="https://reddit.com/r/OpenAI/comments/1xizikk/sources_identify_openais_reported_bel_as_gpt62/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/OpenAI</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xj5nu9/openais_astra_model_becomes_top_distillation/" title="https://reddit.com/r/singularity/comments/1xj5nu9/openais_astra_model_becomes_top_distillation/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a> <a class="src" href="https://reddit.com/r/artificial/comments/1xiein9/new_aa_intelligence_index_v5_with_private_tests/" title="https://reddit.com/r/artificial/comments/1xiein9/new_aa_intelligence_index_v5_with_private_tests/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/artificial</span></a>
+          </div>
+          <h3>Frontier model leaks, distillation, and benchmarks</h3>
+          <p>Leaks and rumors centered on OpenAI’s GPT-6.2 Betelgeuse naming, Astra as a top distillation target for Chinese labs, and Google’s Gemini 4 Carbon launch for cyber and long-horizon engineering. Benchmark discourse turned skeptical toward Artificial Analysis Intelligence Index v5 after private tests reportedly shifted rankings in favor of closed US models.</p>
+        </div><div class="card" id="subscriptions-usage-limits-and-silent-api-changes">
+          <div class="meta">
+            <span>11 posts</span>
+            <a class="src" href="https://reddit.com/r/OpenAI/comments/1xipr8d/usage_doubled/" title="https://reddit.com/r/OpenAI/comments/1xipr8d/usage_doubled/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/OpenAI</span></a> <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xiqw9i/why_you_cant_trust_cloud_api_endpoints_40_days_of/" title="https://reddit.com/r/LocalLLaMA/comments/1xiqw9i/why_you_cant_trust_cloud_api_endpoints_40_days_of/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/claude/comments/1xivtv9/insanely_disappointed_with_claudes_upgrade_process/" title="https://reddit.com/r/claude/comments/1xivtv9/insanely_disappointed_with_claudes_upgrade_process/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/claude</span></a>
+          </div>
+          <h3>Subscriptions, usage limits, and silent API changes</h3>
+          <p>OpenAI and Anthropic users traded notes on usage halving and rollbacks, confusing upgrade behavior on Claude tiers, Dot routing tasks to premium models without clear consent, and upsell banners for ChatGPT Pro. A detailed telemetry post documented a provider silently swapping DeepSeek Flash variants, breaking coding-agent behavior without notice.</p>
+        </div><div class="card" id="platform-access-ethics-and-safety-narratives">
+          <div class="meta">
+            <span>7 posts</span>
+            <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xj2pnp/reddit_will_force_everyone_to_log_in/" title="https://reddit.com/r/LocalLLaMA/comments/1xj2pnp/reddit_will_force_everyone_to_log_in/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/LocalLLaMA/comments/1xix61q/arguably_unethical_behavior_from_cohere/" title="https://reddit.com/r/LocalLLaMA/comments/1xix61q/arguably_unethical_behavior_from_cohere/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/LocalLLaMA</span></a> <a class="src" href="https://reddit.com/r/singularity/comments/1xi1xgl/anthropic_president_daniela_amodei_calls_ai/" title="https://reddit.com/r/singularity/comments/1xi1xgl/anthropic_president_daniela_amodei_calls_ai/"><svg class="src-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#FF4500"/><circle cx="7.2" cy="10.2" r="1.35" fill="#fff"/><circle cx="12.8" cy="10.2" r="1.35" fill="#fff"/><path d="M7.4 12.4c.8.7 1.7 1 2.6 1s1.8-.3 2.6-1" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg><span>r/singularity</span></a>
+          </div>
+          <h3>Platform access, ethics, and safety narratives</h3>
+          <p>Reddit’s planned logged-in-only experience drew attention for breaking public search and tooling that agents rely on. Cohere faced backlash for a provocative open-weight model blog timed near a large fundraise, while Anthropic’s Daniela Amodei criticized AI companion apps as harmful disintermediation and Microsoft’s Mustafa Suleyman insisted AI cannot be conscious.</p>
+        </div></div>
+
+  <h2 id="notable-papers">Notable papers <span style="font-size:.7em;font-weight:600">(this week)</span></h2>
+  <div class="card-grid"><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06301v1">HarnessOpt-Bench: Evaluating LLMs at Harness Optimization</a></h3>
+          <p>Introduces a benchmark for how well LLMs can iteratively improve the surrounding agent harness—prompts, tools, control flow, and memory—rather than only raw model weights. Treats harness tuning as a first-class capability for agentic deployments.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06346v1">TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories</a></h3>
+          <p>Targets debugging in long agent runs by locating the earliest trajectory step that causally leads to final failure, instead of only scoring outcomes. Aims to make cascading agent errors easier to attribute and fix.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06370v1">The Bitter Lesson of Tool Calling</a></h3>
+          <p>Empirically compares programmatic tool use (code that chains and parallelizes calls) against classic JSON tool-calling on a standard benchmark across model generations. Connects to the community debate on why CodeAct-style patterns have not dominated production stacks.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06305v1">Beyond Top-K: Replacing Black-Box Retrieval with Interpretable Agentic Operations</a></h3>
+          <p>Argues that chunk-and-embed top-k retrieval breaks on table-heavy financial and regulatory documents, and proposes measurable agentic document operations as an alternative. Relevant to practitioners building RAG over structured long reports.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06296v1">On-Policy Self-Distillation without Any Supervision</a></h3>
+          <p>Shows post-training self-distillation can run on-policy without external labels, environment rewards, or a larger teacher model. Pushes toward genuinely self-contained refinement loops for LLMs.</p>
+        </div><div class="card">
+          <h3><a href="https://arxiv.org/abs/2608.06353v1">Resourced Authority: A Mechanism-Design Model for Participatory Governance of Deployed AI Agents</a></h3>
+          <p>Formalizes ongoing governance of deployed agents through resource budgets so authorization is enforced by compute limits rather than policy text alone. Aligns with production threads on fail-closed agent authorization and governance.</p>
+        </div></div>
+
+  <h2 id="top-questions">Top questions</h2>
+  <ul><li><a href="https://reddit.com/r/OpenAI/comments/1xilee0/can_someone_explain_this_to_me_like_im_5_years_old/">If AI replaces jobs at scale, where do people get income to remain consumers—why isn’t that question asked more often?</a></li><li><a href="https://reddit.com/r/ClaudeAI/comments/1xj647r/is_prompt_engineering_really_a_thing_or_is_it/">Is prompt engineering a real skill or mostly a bait tactic to harvest comments and course signups?</a></li><li><a href="https://reddit.com/r/LocalLLaMA/comments/1xis2qz/free_web_search_for_my_local_agent_stopped/">What should people pay per 1,000 web search queries now that free search APIs and self-hosted SearXNG instances are failing for local research agents?</a></li><li><a href="https://reddit.com/r/claude/comments/1xixg9h/is_the_consensus_currently_that_fable_51_is/">Is the consensus that Claude Fable 5.1 is inferior to Opus 5.5 for serious work?</a></li><li><a href="https://reddit.com/r/LocalLLaMA/comments/1xj2hi1/qwen_38_what_am_i_missing_here/">For local LLM newcomers with strong GPUs, why does Qwen 3.8 feel fine for chat but weak on domain tasks like Houdini VEX—what setup am I missing?</a></li><li><a href="https://reddit.com/r/LocalLLaMA/comments/1xj2pnp/reddit_will_force_everyone_to_log_in/">How will Reddit’s logged-in-only shift affect local AIs and agents that depend on searching Reddit via the open web?</a></li><li><a href="https://reddit.com/r/singularity/comments/1xiwq6i/xai_has_everything_it_needs_so_why_is_it_falling/">xAI has Twitter data, Colossus-scale compute, and funding—so why does Grok keep falling behind the frontier?</a></li><li><a href="https://reddit.com/r/artificial/comments/1xijiuq/does_consciousness_have_to_be_biological_and_what/">Does consciousness require a biological body, and what would it mean ethically if it does not?</a></li><li><a href="https://reddit.com/r/singularity/comments/1xi88qa/we_either_need_to_make_ai_perfect_or_teach_people/">We either need perfect AI or better human reasoning—how do users tell when models are catastrophically wrong?</a></li><li><a href="https://reddit.com/r/MachineLearning/comments/1xgdl42/how_to_do_method_research_when_i_feel_i_have_no/">How do PhD students in small labs learn to do method research with limited data when the PI keeps shifting topics?</a></li></ul>
+  <footer>
+    Sourced from public Reddit AI communities, Google News, and arXiv
+    (cs.AI / cs.LG / cs.CL), summarized by AI. Links go to the original posts,
+    articles, and papers.
+  </footer>
+  </div>
+  
+  <aside class="timeline-rail" aria-label="Published digests">
+    <div class="timeline-card">
+      <div class="timeline-title">Timeline</div>
+      <ol class="timeline"><li class="tl-item current"><span class="tl-dot" aria-hidden="true"></span><span class="tl-link"><span class="tl-date">Oct 30</span><span class="tl-year">2026</span></span></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-23/"><span class="tl-date">Oct 23</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-16/"><span class="tl-date">Oct 16</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-09/"><span class="tl-date">Oct 09</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-10-02/"><span class="tl-date">Oct 02</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-25/"><span class="tl-date">Sep 25</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-18/"><span class="tl-date">Sep 18</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-11/"><span class="tl-date">Sep 11</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-09-04/"><span class="tl-date">Sep 04</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-28/"><span class="tl-date">Aug 28</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-21/"><span class="tl-date">Aug 21</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-14/"><span class="tl-date">Aug 14</span><span class="tl-year">2026</span></a></li><li class="tl-item"><span class="tl-dot" aria-hidden="true"></span><a class="tl-link" href="../2026-08-08/"><span class="tl-date">Aug 08</span><span class="tl-year">2026</span></a></li></ol>
+    </div>
+  </aside>
+
+  </div>
+  </div>
+</body>
+</html>
